@@ -35,6 +35,7 @@
 									<thead>
 										<tr>
 											<th>SL</th>
+											<th>Page Position</th>
 											<th>Page Name</th>
 											<th>Page Title</th>
 											<th>Action</th>
@@ -44,11 +45,12 @@
 									<tbody>
 										<tr>
 											<td>{{ ++$key }}</td>
+											<td>{{ $row->page_position }}</td>
 											<td>{{ $row->page_name }}</td>
 											<td>{{ $row->page_title }}</td>
 											<td>
-												<a href="{{ route('category.edit',$row->id) }}" class="btn btn-info btn-sm edit"><i class="fas fa-edit"></i></a>
-												<a href="{{ route('category.destroy',$row->id) }}" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i></a>
+												<a href="{{ route('page.edit',$row->id) }}" class="btn btn-info btn-sm edit"><i class="fas fa-edit"></i></a>
+												<a href="{{ route('page.destroy',$row->id) }}" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i></a>
 											</td>
 										</tr>
 									</tbody>

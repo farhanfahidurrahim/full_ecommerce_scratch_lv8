@@ -65,6 +65,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 			Route::get('/all','PageController@index')->name('page.index');
 			Route::get('/create','PageController@create')->name('page.create');
 			Route::post('/store','PageController@store')->name('page.store');
+			Route::get('/edit/{id}','PageController@edit')->name('page.edit');
+			Route::post('/update/{id}','PageController@update')->name('page.update');
+			Route::get('/delete/{id}','PageController@destroy')->name('page.destroy');
 		});
 	});
 
