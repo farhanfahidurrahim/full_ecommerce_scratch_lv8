@@ -52,6 +52,13 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::get('/delete/{id}','ChildcategoryController@destroy')->name('childcategory.destroy');
 	});
 
+	//Warehouse routes... Full Ajax & Yajra DataTable
+	Route::group(['prefix'=>'warehouse'], function(){
+		Route::get('/','WarehouseController@index')->name('warehouse.index');
+		Route::post('/add','WarehouseController@store')->name('warehouse.store');
+		Route::get('/delete/{id}','WarehouseController@destroy')->name('warehouse.delete');
+	});
+
 	//Setting routes...
 	Route::group(['prefix'=>'setting'], function(){
 		//__Seo

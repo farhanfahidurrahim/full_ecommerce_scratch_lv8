@@ -63,7 +63,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('brand.index') }}" class="nav-link">
+            <a href="{{ route('warehouse.index') }}" class="nav-link">
               <i class="nav-icon far fa-circle text-primary"></i>
               <p>Warehouse</p>
             </a>
