@@ -60,7 +60,13 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 			Route::post('/update/{id}','SettingController@seoUpdate')->name('setting.seo.update');
 		});
 
-		//__Seo
+		//__Website
+		Route::group(['prefix'=>'website'], function(){
+			Route::get('/','SettingController@website')->name('setting.website');
+			Route::post('/update/{id}','SettingController@websiteUpdate')->name('setting.website.update');
+		});
+
+		//__Page
 		Route::group(['prefix'=>'page'], function(){
 			Route::get('/all','PageController@index')->name('page.index');
 			Route::get('/create','PageController@create')->name('page.create');
