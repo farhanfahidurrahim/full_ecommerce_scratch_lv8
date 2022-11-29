@@ -23,8 +23,7 @@ class WarehouseController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-
-                    $actionbtn='
+                    $actionbtn='<a href="#" class="btn btn-info btn-sm edit" data-id="'.$row->id.'" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></a>
                         <a href="'.route('warehouse.delete',[$row->id]).'" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i></a>';
 
                     return $actionbtn;
@@ -50,6 +49,19 @@ class WarehouseController extends Controller
         DB::table('warehouses')->insert($data);
         $notification=array('messege' => 'Warehouse Inserted!', 'alert-type' => 'success');
         return redirect()->back()->with($notification);
+    }
+
+    //Edit Page
+    public function edit($id)
+    {
+        $warehouse=DB::table('warehouses')->where('id',$id)->first();
+        return view('admin.warehouse.war_edit',compact('warehouse'));
+    }
+
+    //Update Page
+    public function update(Request $request, $id)
+    {
+        
     }
 
     //Delete Warehouse

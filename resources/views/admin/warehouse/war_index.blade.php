@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-@section('admin_content')
 
-<div class="content-wrapper">
+@section('admin_content')
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -11,86 +11,103 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">+ Add New</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#addModal"> + Add New</button>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <!-- Main content -->
-    <section class="content">
-      	<div class="container-fluid">
-        	<div class="row">
-          		<div class="col-12">
-            		<div class="card">
-              			<div class="card-header">
-                			<h3 class="card-title">DataTable All Warehouse</h3>
-              			</div>
-              			<!-- /.card-header -->
-              			<div class="card-body">
-			                <table class="table table-bordered table-striped table-sm ytable">
-								<thead>
-									<tr>
-										<th>SL</th>
-										<th>Warehouse Name</th>
-										<th>Warehouse Address</th>
-										<th>Warehouse Phone</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-			                </table>
-			            <!-- /.card-body -->
-              			</div>
-          			</div>
-      			</div>
-  			</div>
-		</div>
-	</section>
+     <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Warehouse list </h3>
+              </div>
+              <!-- /.card-header -->
+                <div class="card-body">
+                  <table  class="table table-bordered table-striped table-sm ytable">
+                    <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Warehouse Name</th>
+                      <th>Warehouse Address</th>
+                      <th>Warehouse Phone</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                  
+                    </tbody>
+                  </table>
+                </div>
+	          </div>
+	      </div>
+	  </div>
+	</div>
+</section>
 </div>
 
-<!-- Warehouse Add New Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+{{-- category insert modal --}}
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Warehouse</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Warehouse</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+     <form action="{{ route('warehouse.store') }}"  method="Post" id="add-form">
+      @csrf
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="warehouse_name">Warehouse Name</label>
+            <input type="text" class="form-control"  name="warehouse_name" required="" placeholder="Warehouse Name">
+          </div>   
 
-      <form action="{{ route('warehouse.store') }}" method="post" id="add-form">
-        	@csrf
-	      <div class="modal-body">
-			  <div class="form-group">
-			    <label for="childcategory_name">Warehouse Name</label>
-			    <input type="text" name="warehouse_name" class="form-control" placeholder="Enter Warehouse Name" required>
-			  </div>
-			  <div class="form-group">
-			    <label for="childcategory_name">Warehouse Address</label>
-			    <input type="text" name="warehouse_address" class="form-control" placeholder="Enter Warehouse Address" required>
-			  </div>
-			  <div class="form-group">
-			    <label for="childcategory_name">Warehouse Phone</label>
-			    <input type="text" name="warehouse_phone" class="form-control" placeholder="Enter Warehouse Phone" required>
-			  </div>
-	      </div>
+          <div class="form-group">
+            <label for="warehouse_address">Warehouse Address</label>
+            <input type="text" class="form-control"  name="warehouse_address" required="" placeholder="Warehouse Address">
+          </div>   
 
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn btn-primary"><span class="d-none loader">Loader...</span><span class="submit_btn">Submit</span></button>
-	      </div>
+          <div class="form-group">
+            <label for="warehouse_phone">Warehouse Phone</label>
+            <input type="text" class="form-control"  name="warehouse_phone" required="" placeholder="Warehouse Phone">
+          </div>   
+      </div>
+      <div class="modal-footer">
+        <button type="Submit" class="btn btn-primary"> <span class="d-none loader"><i class="fas fa-spinner"></i> Loading..</span> <span class="submit_btn"> Submit </span> </button>
+      </div>
       </form>
     </div>
   </div>
 </div>
 
+{{-- edit modal --}}
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Warehouse</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div id="modal_body">
+     		
+     </div>	
+    </div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+
 <script type="text/javascript">
-	//Yajra DataTable
 	$(function childcategory(){
 		var table=$('.ytable').DataTable({
 			processing:true,
@@ -105,14 +122,18 @@
 			]
 		});
 	});
-
-	//form submit
-	$('#add-form').on('submit',function(){
-	  $('.loader').removeClass('d-none');
-	  $('.submit_btn').addClass('d-none');
-	});
-
+  
+  $('body').on('click','.edit', function(){
+    let id=$(this).data('id');
+    $.get("warehouse/edit/"+id, function(data){
+        $("#modal_body").html(data);
+    });
+  });
+  //form submit
+  $('#add-form').on('submit',function(){
+      $('.loader').removeClass('d-none');
+      $('.submit_btn').addClass('d-none');
+  });
 </script>
-
 
 @endsection
