@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 12:36 PM
+-- Generation Time: Dec 01, 2022 at 08:11 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -205,7 +205,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2022_11_30_045001_create_coupons_table', 12),
 (16, '2022_11_30_144234_create_pickup_point_table', 13),
 (17, '2022_12_01_044812_add_pickup_point_id_to_products_table', 14),
-(18, '2022_12_01_094916_add_color_to_products_table', 15);
+(18, '2022_12_01_094916_add_color_to_products_table', 15),
+(19, '2022_12_01_120743_add_slug_to_products_table', 16),
+(20, '2022_12_01_174159_add_date_month_to_products_table', 17);
 
 -- --------------------------------------------------------
 
@@ -301,8 +303,9 @@ CREATE TABLE `products` (
   `childcategory_id` int(11) DEFAULT NULL,
   `brand_id` int(11) DEFAULT NULL,
   `pickup_point_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tags` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -312,7 +315,7 @@ CREATE TABLE `products` (
   `selling_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `stock_quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `warehouse` int(11) DEFAULT NULL,
+  `warehouse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `images` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -322,9 +325,18 @@ CREATE TABLE `products` (
   `flash_deal_id` int(11) DEFAULT NULL,
   `cash_on_delivery` int(11) DEFAULT NULL,
   `admin_id` int(11) DEFAULT NULL,
+  `month` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `size`, `color`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `month`, `date`, `created_at`, `updated_at`) VALUES
+(1, 9, 6, 6, 3, 1, 'FFR rrf', 'ffr-rrf', '963', 'pcs', 'shirt,men', 'M,XL', 'Black', NULL, '1000', '1500', '300', '10', 'F w name', '<p>asdadad ad</p>', 'ffr-rrf.jpg', '[\"1751037156792880.jpg\"]', 1, 1, 1, NULL, NULL, 1, 'December', '01-12-2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -617,7 +629,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -641,7 +653,7 @@ ALTER TABLE `pickup_point`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `seos`
