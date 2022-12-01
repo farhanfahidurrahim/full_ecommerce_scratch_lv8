@@ -92,7 +92,7 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    //Product Create: get child category!!
+    //Product Create Page: get child category by Ajax!!
     public function GetChildCategory($id) //got $id; -> subcategory_id
     {
         $data=DB::table('childcategories')->where('subcategory_id',$id)->get();

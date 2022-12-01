@@ -85,6 +85,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 	//Product routes...
 	Route::group(['prefix'=>'product'], function(){
 		Route::get('/create','ProductController@create')->name('product.create');
+		Route::post('/store','ProductController@store')->name('product.store');
 	});
 
 	//Setting routes...
