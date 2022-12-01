@@ -29,6 +29,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::post('/update/{id}','CategoryController@update')->name('category.update');
 	});
 
+	//Global Routes...
+	Route::get('/get-child-category/{id}','CategoryController@GetChildCategory');
+
 	//SubCategory routes...
 	Route::group(['prefix'=>'subcategory'], function(){
 		Route::get('/all','SubcategoryController@index')->name('subcategory.index');
@@ -49,7 +52,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 	Route::group(['prefix'=>'brand'], function(){
 		Route::get('/all','BrandController@index')->name('brand.index');
 		Route::post('/add','BrandController@store')->name('brand.store');
-		Route::get('/delete/{id}','ChildcategoryController@destroy')->name('childcategory.destroy');
+		Route::get('/delete/{id}','BrandController@destroy')->name('brand.destroy');
 	});
 
 	//Warehouse routes... Full Ajax & Yajra DataTable

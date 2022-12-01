@@ -248,6 +248,8 @@
   $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
+
+
      //ajax request send for collect childcategory
      $("#subcategory_id").change(function(){
       var id = $(this).val();
@@ -262,6 +264,8 @@
            }
         });
      });
+
+     
     $(document).ready(function(){      
        var postURL = "<?php echo url('addmore'); ?>";
        var i=1;  

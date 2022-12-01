@@ -91,4 +91,11 @@ class CategoryController extends Controller
         $notification=array('messege' => 'Category Deleted!', 'alert-type' => 'error');
         return redirect()->back()->with($notification);
     }
+
+    //Product Create: get child category!!
+    public function GetChildCategory($id) //got $id; -> subcategory_id
+    {
+        $data=DB::table('childcategories')->where('subcategory_id',$id)->get();
+        return response()->json($data);
+    }
 }

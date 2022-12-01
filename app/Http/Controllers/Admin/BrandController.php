@@ -26,7 +26,7 @@ class BrandController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
 
-                    $actionbtn='<a href="'.route('childcategory.destroy',[$row->id]).'" class="btn btn-info btn-sm" id="delete"><i class="fas fa-trash"></i></a>';
+                    $actionbtn='<a href="'.route('brand.destroy',[$row->id]).'" class="btn btn-info btn-sm" id="delete"><i class="fas fa-trash"></i></a>';
 
                     return $actionbtn;
                 })
@@ -63,5 +63,12 @@ class BrandController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    //Delete Brand
+    public function destroy($id)
+    {
+        DB::table('brands')->where('id',$id)->delete();
+        $notification=array('messege' => 'Brand Delete!', 'alert-type' => 'error');
+        return redirect()->back()->with($notification);
+    }
 
 }
