@@ -36,6 +36,36 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon far fa-plus-square"></i>
+              <p>
+                Product
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p class="text">All Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('product.create') }}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p class="text">Add Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('page.index') }}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p class="text">Manage Product</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-header">Divison</li>
           <li class="nav-item">
             <a href="{{ route('category.index') }}" class="nav-link">
@@ -67,6 +97,49 @@
               <i class="nav-icon far fa-circle text-primary"></i>
               <p>Warehouse</p>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon far fa-plus-square"></i>
+              <p>
+                Offer
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('coupon.index') }}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p class="text">Coupon</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('page.index') }}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p class="text">E Campaign</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon far fa-plus-square"></i>
+              <p>
+                Pickup Point
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('pickuppoint.index') }}" class="nav-link">
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p class="text">Index</p>
+                </a>
+              </li>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">

@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Warehouse</h1>
+            <h1 class="m-0">Pickup Point</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -24,7 +24,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Warehouse list </h3>
+                <h3 class="card-title">Pickup-Point list </h3>
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
@@ -32,15 +32,16 @@
                     <thead>
                     <tr>
                       <th>SL</th>
-                      <th>Warehouse Name</th>
-                      <th>Warehouse Address</th>
-                      <th>Warehouse Phone</th>
+                      <th>Pickup Point Name</th>
+                      <th>Pickup Point Address</th>
+                      <th>Pickup Point Phone</th>
+                      <th>Pickup Point Phone(Two)</th>
                       <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                  
+  
                     </tbody>
                   </table>
                 </div>
@@ -51,36 +52,49 @@
 </section>
 </div>
 
-{{-- Add New insert modal --}}
+{{-- Add Modal --}}
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Warehouse</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Coupon</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <form action="{{ route('warehouse.store') }}"  method="Post" id="add-form">
+     <form action="{{ route('coupon.store') }}"  method="Post" id="add_form">
       @csrf
       <div class="modal-body">
           <div class="form-group">
-            <label for="warehouse_name">Warehouse Name</label>
-            <input type="text" class="form-control"  name="warehouse_name" required="" placeholder="Warehouse Name">
-          </div>   
-
+            <label for="coupon_code">Coupon Code</label>
+            <input type="text" class="form-control"  name="coupon_code" required="" placeholder="Coupon Code">
+          </div>     
           <div class="form-group">
-            <label for="warehouse_address">Warehouse Address</label>
-            <input type="text" class="form-control"  name="warehouse_address" required="" placeholder="Warehouse Address">
-          </div>   
-
+            <label for="type">Coupon Type</label>
+            <select class="form-control" name="type" required>
+            	<option selected disabled value="">Please Select Type</option>
+            	<option value="1">Fixed</option>
+            	<option value="2">Percentage</option>
+            </select>
+          </div>
           <div class="form-group">
-            <label for="warehouse_phone">Warehouse Phone</label>
-            <input type="text" class="form-control"  name="warehouse_phone" required="" placeholder="Warehouse Phone">
-          </div>   
+            <label for="coupon_amount">Coupon Amount</label>
+            <input type="text" class="form-control"  name="coupon_amount" required="" placeholder="Coupon Amount">
+          </div>
+          <div class="form-group">
+            <label for="valid_date">Valid Date</label>
+            <input type="date" class="form-control"  name="valid_date" required="">
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" name="status">
+            	<option value="Active">Active</option>
+            	<option value="Inactive">Inactive</option>
+            </select>
+          </div> 
       </div>
-      <div class="modal-footer">
-        <button type="Submit" class="btn btn-primary"> <span class="d-none loader"><i class="fas fa-spinner"></i> Loading..</span> <span class="submit_btn"> Submit </span> </button>
+       <div class="modal-footer">
+        <button type="Submit" class="btn btn-primary"><span class="loading d-none">Loading....</span>Submit</button>
       </div>
       </form>
     </div>
@@ -108,32 +122,44 @@
 
 
 <script type="text/javascript">
+	//Yajra DataTable
 	$(function childcategory(){
 		var table=$('.ytable').DataTable({
 			processing:true,
 			serverSide:true,
-			ajax:"{{ route('warehouse.index') }}",
+			ajax:"{{ route('pickuppoint.index') }}",
 			columns:[
-				{data:'DT_RowIndex',name:'DT_RowIndex'},
-				{data:'warehouse_name'  ,name:'warehouse_name'},
-				{data:'warehouse_address',name:'warehouse_address'},
-				{data:'warehouse_phone',name:'warehouse_phone'},
-				{data:'action',name:'action',orderable:true, searchable:true},
+				{data:'DT_RowIndex', name:'DT_RowIndex'},
+				{data:'pickup_point_name', name:'pickup_point_name'},
+				{data:'pickup_point_address', name:'pickup_point_addres'},
+				{data:'pickup_point_phone', name:'pickup_point_phone'},
+				{data:'pickup_point_phone_two', name:'pickup_point_phone_two'},
+				{data:'action', name:'action', orderable:true, searchable:true},
 			]
 		});
 	});
 
-  $('body').on('click','.edit', function(){
-    let id=$(this).data('id');
-    $.get("warehouse/edit/"+id, function(data){
-        $("#modal_body").html(data);
-    });
-  });
-  //form submit
-  $('#add-form').on('submit',function(){
-      $('.loader').removeClass('d-none');
-      $('.submit_btn').addClass('d-none');
-  });
+	//Store Add New with Ajax Call
+	$('#add_form').submit(function(e){
+		e.preventDefault();
+		$('.loading').removeClass('d-none');
+		var url = $(this).attr('action');
+		var request =$(this).serialize();
+		$.ajax({
+		  url:url,
+		  type:'post',
+		  async:false,
+		  data:request,
+		  success:function(data){
+		    toastr.success(data);
+		    $('#add_form')[0].reset();
+		    $('.loading').addClass('d-none');
+		    $('#addModal').modal('hide');
+		    table.ajax.reload();
+		  }
+		});
+	});
+
 </script>
 
 @endsection

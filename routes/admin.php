@@ -61,6 +61,29 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::get('/delete/{id}','WarehouseController@destroy')->name('warehouse.delete');
 	});
 
+	//Coupon routes...
+	Route::group(['prefix'=>'coupon'], function(){
+		Route::get('/','CouponController@index')->name('coupon.index');
+		Route::post('/store','CouponController@store')->name('coupon.store');
+		// Route::get('/edit/{id}','WarehouseController@edit');
+		// Route::post('/update','WarehouseController@update')->name('warehouse.update');
+		Route::get('/delete/{id}','CouponController@destroy')->name('coupon.delete');
+	});
+
+	//Pickup Point
+	Route::group(['prefix'=>'pickup-point'], function(){
+		Route::get('/','PickupController@index')->name('pickuppoint.index');
+		//Route::post('/store','CouponController@store')->name('coupon.store');
+		// Route::get('/edit/{id}','WarehouseController@edit');
+		// Route::post('/update','WarehouseController@update')->name('warehouse.update');
+		Route::get('/delete/{id}','CouponController@destroy')->name('coupon.delete');
+	});
+
+	//Product routes...
+	Route::group(['prefix'=>'product'], function(){
+		Route::get('/create','ProductController@create')->name('product.create');
+	});
+
 	//Setting routes...
 	Route::group(['prefix'=>'setting'], function(){
 		//__Seo
