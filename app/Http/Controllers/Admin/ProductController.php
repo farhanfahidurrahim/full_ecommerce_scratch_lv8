@@ -40,9 +40,23 @@ class ProductController extends Controller
                 })
                 ->editColumn('featured',function($row){
                     if ($row->featured==1) {
-                        return "Yes";
+                        return '<a href="#" data-id="'.$row->id.'" class="deactive_featured"><span class="badge badge-success">Active</span> <span>||</span> <span class="badge badge-warning">Click:Deactive</span></a>';
                     }else{
-                        return "No";
+                        return '<a href="#" data-id="'.$row->id.'" class="active_featured"><span class="badge badge-danger">Deactive</span> <span>||</span> <span class="badge badge-warning">Click:Active</span></a>';
+                    }
+                })
+                ->editColumn('today_deal',function($row){
+                    if ($row->today_deal==1) {
+                        return '<a href=""><span class="badge badge-success">Active</span> <i class="fas fa-thumbs-down text-danger"></i></a>';
+                    }else{
+                        return '<a href=""><span class="badge badge-success">Deactive</span> <i class="fas fa-thumbs-up text-danger"></i></a>';
+                    }
+                })
+                ->editColumn('status',function($row){
+                    if ($row->status==1) {
+                        return '<a href=""><span class="badge badge-success">Active</span> <i class="fas fa-thumbs-down text-danger"></i></a>';
+                    }else{
+                        return '<a href=""><span class="badge badge-success">Deactive</span> <i class="fas fa-thumbs-up text-danger"></i></a>';
                     }
                 })
                 ->addColumn('action', function($row){
@@ -50,7 +64,7 @@ class ProductController extends Controller
 
                     return $actionbtn;
                 })
-                ->rawColumns(['action','category_name','subcategory_name','brand_name','thumbnail','featured'])
+                ->rawColumns(['action','category_name','subcategory_name','brand_name','thumbnail','featured','today_deal','status'])
                 ->make(true);
         }
 
@@ -140,5 +154,18 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    
+    //Not Featured
+    public function notfeatured($id)
+    {
+        DB::table('products')->where('id',$id)->update(['featured'=>0]);
+        return response()->json('Product Not Featured');
+    }
+
+    //Yes Featured
+    public function yesfeatured($id)
+    {
+        DB::table('products')->where('id',$id)->update(['featured'=>1]);
+        return response()->json('Product Now Featured');
+    }
+
 }

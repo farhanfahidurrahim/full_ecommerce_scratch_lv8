@@ -87,7 +87,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::get('/index','ProductController@index')->name('product.index');
 		Route::get('/create','ProductController@create')->name('product.create');
 		Route::post('/store','ProductController@store')->name('product.store');
-		//Route::get('/ind','ProductController@store')->name('product.store');
+		Route::get('/not-featured/{id}','ProductController@notfeatured');
+		Route::get('/yes-featured/{id}','ProductController@yesfeatured');
 	});
 
 	//Setting routes...

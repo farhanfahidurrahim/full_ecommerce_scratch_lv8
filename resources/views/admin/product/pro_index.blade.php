@@ -42,7 +42,7 @@
 										<th>Featured</th>
 										<th>Today Deal</th>
 										<th>Status</th>
-										<th>Active</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -60,8 +60,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-	$(function childcategory(){
-		var table=$('.ytable').DataTable({
+	$(function products(){
+		table=$('.ytable').DataTable({
 			processing:true,
 			serverSide:true,
 			ajax:"{{ route('product.index') }}",
@@ -80,6 +80,34 @@
 			]
 		});
 	});
+
+	//deactive featured
+	$('body').on('click','.deactive_featured', function(){
+	    var id=$(this).data('id');
+		var url = "{{ url('product/not-featured') }}/"+id;
+		$.ajax({
+			url:url,
+			type:'get',
+			success:function(data){  
+	        toastr.success(data);
+	        table.ajax.reload();
+	      }
+	  	});
+    });
+    //active featured
+	$('body').on('click','.active_featured', function(){
+	    var id=$(this).data('id');
+		var url = "{{ url('product/yes-featured') }}/"+id;
+		$.ajax({
+			url:url,
+			type:'get',
+			success:function(data){  
+	        toastr.success(data);
+	        table.ajax.reload();
+	      }
+	  	});
+    });
+
 </script>
 
 @endsection
