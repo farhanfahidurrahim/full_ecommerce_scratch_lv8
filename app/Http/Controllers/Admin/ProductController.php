@@ -5,15 +5,56 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use DataTables;
 use Auth;
 use Illuminate\Support\Str;
 use Image;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    //Index Product by Ajax
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $imgurl='public/files/product';
+            $data=Product::latest()->get(); //EL ORM
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->editColumn('thumbnail',function($row) use($imgurl){
+                    return '<img src="'.$imgurl.'/'.$row->thumbnail.'"  height="30" width="30" >';
+                })
+                ->editColumn('category_name',function($row){
+                    return $row->category->category_name;
+                })
+                ->editColumn('subcategory_name',function($row){
+                    return $row->subcategory->subcategory_name;
+                })
+                ->editColumn('brand_name',function($row){
+                    return $row->brand->brand_name;
+                })
+                ->editColumn('featured',function($row){
+                    if ($row->featured==1) {
+                        return "Yes";
+                    }else{
+                        return "No";
+                    }
+                })
+                ->addColumn('action', function($row){
+                    $actionbtn='';
+
+                    return $actionbtn;
+                })
+                ->rawColumns(['action','category_name','subcategory_name','brand_name','thumbnail','featured'])
+                ->make(true);
+        }
+
+        return view('admin.product.pro_index');
     }
 
     //Add Prodcut
@@ -98,4 +139,6 @@ class ProductController extends Controller
         $notification=array('messege' => 'Product Add Successfully!', 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }
+
+    
 }
