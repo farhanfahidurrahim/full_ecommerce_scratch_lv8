@@ -84,11 +84,17 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 
 	//Product routes...
 	Route::group(['prefix'=>'product'], function(){
-		Route::get('/index','ProductController@index')->name('product.index');
+		Route::get('/','ProductController@index')->name('product.index');
 		Route::get('/create','ProductController@create')->name('product.create');
 		Route::post('/store','ProductController@store')->name('product.store');
-		Route::get('/not-featured/{id}','ProductController@notfeatured');
+		Route::post('/edit/{id}','ProductController@store')->name('product.edit');
+		Route::post('/store','ProductController@store')->name('product.delete');
 		Route::get('/yes-featured/{id}','ProductController@yesfeatured');
+		Route::get('/not-featured/{id}','ProductController@notfeatured');
+		Route::get('/yes-deal/{id}','ProductController@yesdeal');
+		Route::get('/not-deal/{id}','ProductController@notdeal');
+		Route::get('/yes-status/{id}','ProductController@yesstatus');
+		Route::get('/not-status/{id}','ProductController@notstatus');
 	});
 
 	//Setting routes...

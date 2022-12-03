@@ -45,7 +45,8 @@
 <!-- Main content -->
 <section class="content">
   	<div class="container-fluid">
-   		<form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data"> @csrf
+   		<form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+   		@csrf
        		<div class="row">
           		<div class="col-md-8">
             	<div class="card card-primary">

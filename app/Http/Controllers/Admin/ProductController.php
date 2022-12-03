@@ -23,21 +23,42 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $imgurl='public/files/product';
-            $data=Product::latest()->get(); //EL ORM
-            return DataTables::of($data)
+
+            $product="";
+                $query=DB::table('products')
+                    ->leftJoin('categories','products.category_id','categories.id')
+                    ->leftJoin('subcategories','products.subcategory_id','subcategories.id')
+                    ->leftJoin('brands','products.brand_id','brands.id');
+                if ($request->category_id) {
+                    $query->where('products.category_id',$request->category_id);
+                }
+                //if ($request->subcategory_id) {
+                //    $query->where('products.subcategory_id',$request->subcategory_id);
+                //}
+                if ($request->brand_id) {
+                    $query->where('products.brand_id',$request->brand_id);
+                }
+                if ($request->warehouse) {
+                    $query->where('products.warehouse',$request->warehouse);
+                }
+            $product=$query->select('products.*','categories.category_name','subcategories.subcategory_name','brands.brand_name')
+                    ->get();
+
+            return DataTables::of($product)
                 ->addIndexColumn()
                 ->editColumn('thumbnail',function($row) use($imgurl){
                     return '<img src="'.$imgurl.'/'.$row->thumbnail.'"  height="30" width="30" >';
                 })
-                ->editColumn('category_name',function($row){
-                    return $row->category->category_name;
-                })
-                ->editColumn('subcategory_name',function($row){
-                    return $row->subcategory->subcategory_name;
-                })
-                ->editColumn('brand_name',function($row){
-                    return $row->brand->brand_name;
-                })
+                //EL ORM Model ->123
+                //->editColumn('category_name',function($row){
+                    //return $row->category->category_name;
+                //})
+                //->editColumn('subcategory_name',function($row){
+                    //return $row->subcategory->subcategory_name;
+                //})
+                //->editColumn('brand_name',function($row){
+                    //return $row->brand->brand_name;
+                //})
                 ->editColumn('featured',function($row){
                     if ($row->featured==1) {
                         return '<a href="#" data-id="'.$row->id.'" class="deactive_featured"><span class="badge badge-success">Active</span> <span>||</span> <span class="badge badge-warning">Click:Deactive</span></a>';
@@ -47,20 +68,24 @@ class ProductController extends Controller
                 })
                 ->editColumn('today_deal',function($row){
                     if ($row->today_deal==1) {
-                        return '<a href=""><span class="badge badge-success">Active</span> <i class="fas fa-thumbs-down text-danger"></i></a>';
+                        return '<a href="#" data-id="'.$row->id.'" class="deactive_deal"><span class="badge badge-success">Active</span> <span>||</span> <span class="badge badge-warning">Click:Deactive</span></a>';
                     }else{
-                        return '<a href=""><span class="badge badge-success">Deactive</span> <i class="fas fa-thumbs-up text-danger"></i></a>';
+                        return '<a href="#" data-id="'.$row->id.'" class="active_deal"><span class="badge badge-danger">Deactive</span> <span>||</span> <span class="badge badge-warning">Click:Active</span></a>';
                     }
                 })
                 ->editColumn('status',function($row){
                     if ($row->status==1) {
-                        return '<a href=""><span class="badge badge-success">Active</span> <i class="fas fa-thumbs-down text-danger"></i></a>';
+                        return '<a href="#" data-id="'.$row->id.'" class="deactive_status"><span class="badge badge-success">Active</span> <span>||</span> <span class="badge badge-warning">Click:Deactive</span></a>';
                     }else{
-                        return '<a href=""><span class="badge badge-success">Deactive</span> <i class="fas fa-thumbs-up text-danger"></i></a>';
+                        return '<a href="#" data-id="'.$row->id.'" class="active_status"><span class="badge badge-danger">Deactive</span> <span>||</span> <span class="badge badge-warning">Click:Active</span></a>';
                     }
                 })
                 ->addColumn('action', function($row){
-                    $actionbtn='';
+                    $actionbtn='
+                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                        <a href="'.route('product.edit',[$row->id]).'" class="btn btn-info btn-sm edit"><i class="fas fa-edit"></i></a> 
+                        <a href="'.route('product.delete',[$row->id]).'" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i>
+                        </a>';
 
                     return $actionbtn;
                 })
@@ -68,7 +93,13 @@ class ProductController extends Controller
                 ->make(true);
         }
 
-        return view('admin.product.pro_index');
+        $category=DB::table('categories')->get(); //Query Builder
+        $subcategory=DB::table('subcategories')->get();
+        $brand=DB::table('brands')->get();
+        $warehouse=DB::table('warehouses')->get();
+        //$category=Category::all(); // If Model
+        
+        return view('admin.product.pro_index',compact('category','subcategory','brand','warehouse'));
     }
 
     //Add Prodcut
@@ -166,6 +197,30 @@ class ProductController extends Controller
     {
         DB::table('products')->where('id',$id)->update(['featured'=>1]);
         return response()->json('Product Now Featured');
+    }
+    //Not Deal
+    public function notdeal($id)
+    {
+        DB::table('products')->where('id',$id)->update(['today_deal'=>0]);
+        return response()->json('Product Today Deal Deactive');
+    }
+    //Yes Deal
+    public function yesdeal($id)
+    {
+        DB::table('products')->where('id',$id)->update(['today_deal'=>1]);
+        return response()->json('Product Today Deal Active');
+    }
+    //Not Status
+    public function notstatus($id)
+    {
+        DB::table('products')->where('id',$id)->update(['status'=>0]);
+        return response()->json('Product Status OFF');
+    }
+    //Yes Status
+    public function yesstatus($id)
+    {
+        DB::table('products')->where('id',$id)->update(['status'=>1]);
+        return response()->json('Product Status ON');
     }
 
 }
