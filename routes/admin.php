@@ -87,8 +87,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::get('/','ProductController@index')->name('product.index');
 		Route::get('/create','ProductController@create')->name('product.create');
 		Route::post('/store','ProductController@store')->name('product.store');
-		//Route::post('/edit/{id}','ProductController@store')->name('product.edit');
-		//Route::post('/store','ProductController@store')->name('product.delete');
+		Route::post('/edit/{id}','ProductController@edit')->name('product.edit');
+		Route::post('/delete','ProductController@delete')->name('product.delete');
 		Route::get('/yes-featured/{id}','ProductController@yesfeatured');
 		Route::get('/not-featured/{id}','ProductController@notfeatured');
 		Route::get('/yes-deal/{id}','ProductController@yesdeal');

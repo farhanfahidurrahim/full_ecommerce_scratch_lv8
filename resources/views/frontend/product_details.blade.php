@@ -1,93 +1,7 @@
 @extends('layouts.app')
 @section('frontend_content')
 		<!-- Menu -->
-
-		<div class="page_menu">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						
-						<div class="page_menu_content">
-							
-							<div class="page_menu_search">
-								<form action="#">
-									<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
-								</form>
-							</div>
-							<ul class="page_menu_nav">
-								<li class="page_menu_item has-children">
-									<a href="#">Language<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Currency<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item">
-									<a href="#">Home<i class="fa fa-angle-down"></i></a>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-										<li class="page_menu_item has-children">
-											<a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
-											<ul class="page_menu_selection">
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											</ul>
-										</li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item has-children">
-									<a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
-									<ul class="page_menu_selection">
-										<li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									</ul>
-								</li>
-								<li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-								<li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
-							</ul>
-							
-							<div class="menu_contact">
-								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/phone_white.png" alt=""></div>+38 068 005 3570</div>
-								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
+@include('layouts.frontend_bar.collaps_nav')
 	<!-- Single Product -->
 
 	<div class="single_product">
@@ -97,15 +11,15 @@
 				<!-- Images -->
 				<div class="col-lg-2 order-lg-1 order-2">
 					<ul class="image_list">
-						<li data-image="images/single_4.jpg"><img src="images/single_4.jpg" alt=""></li>
-						<li data-image="images/single_2.jpg"><img src="images/single_2.jpg" alt=""></li>
-						<li data-image="images/single_3.jpg"><img src="images/single_3.jpg" alt=""></li>
+						<li data-image="images/single_4.jpg"><img src="{{ asset('public/frontend') }}/images/single_4.jpg" alt=""></li>
+						<li data-image="images/single_2.jpg"><img src="{{ asset('public/frontend') }}/images/single_2.jpg" alt=""></li>
+						<li data-image="images/single_3.jpg"><img src="{{ asset('public/frontend') }}/images/single_3.jpg" alt=""></li>
 					</ul>
 				</div>
 
 				<!-- Selected Image -->
 				<div class="col-lg-5 order-lg-2 order-1">
-					<div class="image_selected"><img src="images/single_4.jpg" alt=""></div>
+					<div class="image_selected"><img src="{{ asset('public/frontend') }}/images/single_4.jpg" alt=""></div>
 				</div>
 
 				<!-- Description -->
@@ -184,7 +98,7 @@
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
 								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_1.jpg" alt=""></div>
+									<div class="viewed_image"><img src="{{ asset('public/frontend') }}/images/view_1.jpg" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">$225<span>$300</span></div>
 										<div class="viewed_name"><a href="#">Beoplay H7</a></div>
@@ -199,7 +113,7 @@
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
 								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_2.jpg" alt=""></div>
+									<div class="viewed_image"><img src="{{ asset('public/frontend') }}/images/view_2.jpg" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">$379</div>
 										<div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
@@ -214,7 +128,7 @@
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
 								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_3.jpg" alt=""></div>
+									<div class="viewed_image"><img src="{{ asset('public/frontend') }}/images/view_3.jpg" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">$225</div>
 										<div class="viewed_name"><a href="#">Samsung J730F...</a></div>
@@ -229,7 +143,7 @@
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
 								<div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_4.jpg" alt=""></div>
+									<div class="viewed_image"><img src="{{ asset('public/frontend') }}/images/view_4.jpg" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">$379</div>
 										<div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
@@ -244,7 +158,7 @@
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
 								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_5.jpg" alt=""></div>
+									<div class="viewed_image"><img src="{{ asset('public/frontend') }}/images/view_5.jpg" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">$225<span>$300</span></div>
 										<div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
@@ -259,7 +173,7 @@
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
 								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_6.jpg" alt=""></div>
+									<div class="viewed_image"><img src="{{ asset('public/frontend') }}/images/view_6.jpg" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">$375</div>
 										<div class="viewed_name"><a href="#">Speedlink...</a></div>
@@ -290,14 +204,14 @@
 
 						<div class="owl-carousel owl-theme brands_slider">
 							
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_1.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_2.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_3.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_4.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_5.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_6.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_7.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_8.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_1.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_2.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_3.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_4.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_5.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_6.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_7.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_8.jpg" alt=""></div></div>
 
 						</div>
 						

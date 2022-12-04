@@ -145,7 +145,7 @@
         
     <!-- Menu -->
 
-    @include('layouts.frontend_bar.navbar')
+     @yield('navbar')
 
     </header>
     
