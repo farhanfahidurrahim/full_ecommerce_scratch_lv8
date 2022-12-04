@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('frontend_content')
 
-@include('layouts.frontend_bar.main_navbar')
-
 <div class="banner">
     <div class="banner_background" style="background-image:url({{ asset('public/frontend') }}/images/banner_background.jpg)"></div>
         <div class="container fill_height">

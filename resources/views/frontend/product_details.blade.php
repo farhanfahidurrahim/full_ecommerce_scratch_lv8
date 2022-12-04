@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('frontend_content')
-
-@include('layouts.frontend_bar.dropdown_navbar')		
 		<!-- Menu -->
 
 		<div class="page_menu">
