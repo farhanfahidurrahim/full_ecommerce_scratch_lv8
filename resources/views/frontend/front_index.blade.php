@@ -2,7 +2,7 @@
 	@section('navbar')
     @include('layouts.frontend_bar.main_navbar')
     @endsection
-@section('frontend_content')
+@section('content')
 
 <div class="banner">
     <div class="banner_background" style="background-image:url({{ asset('public/frontend') }}/images/banner_background.jpg)"></div>

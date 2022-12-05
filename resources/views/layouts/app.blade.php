@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/responsive.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/product_styles.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/product_responsive.css">
-
 </head>
 
 <body>
@@ -39,20 +38,51 @@
             <div class="container">
                 <div class="row">
                     <div class="col d-flex flex-row">
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+8801675717825</div>
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:farhan.fahidurrahim@gmail.com">farhan.fahidurrahim@gmail.com</a></div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/phone.png" alt=""></div>+8801675717825</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend') }}/images/mail.png" alt=""></div><a href="mailto:farhan.fahidurrahim@gmail.com">farhan.fahidurrahim@gmail.com</a></div>
                         <div class="top_bar_content ml-auto">
+
+                            @if(Auth::check())
+                            <div class="top_bar_menu">
+                                <ul class="standard_dropdown top_bar_dropdown" >
+                                    <li>
+                                        <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
+                                        <ul style="width:200px;">
+                                            <li><a href="{{ route('home') }}">Profile</a></li>
+                                            <li><a href="{{ route('customer.logout') }}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                            @endif
+
+                            @guest
                             <div class="top_bar_menu">
                                 <ul class="standard_dropdown top_bar_dropdown">
                                     <li>
-                                        <a href="#">Language<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">English</a></li>
-                                            <li><a href="#">Bangla</a></li>
+                                        <a href="#">Login<i class="fas fa-chevron-down"></i></a>
+                                        <ul style="width: 300px; padding: 10px;">
+                                            <div>
+                                                <form action="{{ route('login') }}" method="POST">
+                                                @csrf
+                                                    <div class="form-group">
+                                                        <label>Email:</label>
+                                                        <input type="email" name="email" class="form-control" autocomplete="off" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Password:</label>
+                                                        <input type="password" name="password" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-sm btn-info">Login</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">Currency<i class="fas fa-chevron-down"></i></a>
+                                        <a href="#">Registration<i class="fas fa-chevron-down"></i></a>
                                         <ul>
                                             <li><a href="#">Taka</a></li>
                                             <li><a href="#">USD</a></li>
@@ -60,11 +90,12 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="top_bar_user">
-                                <div class="user_icon"><img src="images/user.svg" alt=""></div>
+                            @endguest
+                            {{-- <div class="top_bar_user">
+                                <div class="user_icon"><img src="{{ asset('public/frontend') }}/images/user.svg" alt=""></div>
                                 <div><a href="#">Register</a></div>
                                 <div><a href="#">Sign in</a></div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -104,7 +135,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
+                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('public/frontend') }}/images/search.png" alt=""></button>
                                     </form>
                                 </div>
                             </div>
@@ -115,7 +146,7 @@
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                                <div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
+                                <div class="wishlist_icon"><img src="{{ asset('public/frontend') }}/images/heart.png" alt=""></div>
                                 <div class="wishlist_content">
                                     <div class="wishlist_text"><a href="#">Wishlist</a></div>
                                     <div class="wishlist_count">115</div>
@@ -126,7 +157,7 @@
                             <div class="cart">
                                 <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                     <div class="cart_icon">
-                                        <img src="images/cart.png" alt="">
+                                        <img src="{{ asset('public/frontend') }}/images/cart.png" alt="">
                                         <div class="cart_count"><span>10</span></div>
                                     </div>
                                     <div class="cart_content">
@@ -151,7 +182,7 @@
     
     <!-- Banner -->
 
-    @yield('frontend_content')    
+    @yield('content')    
 
     <!-- Newsletter -->
 
