@@ -64,6 +64,7 @@
                                         <a href="#">Login<i class="fas fa-chevron-down"></i></a>
                                         <ul style="width: 300px; padding: 10px;">
                                             <div>
+                                                <strong>Login Your Account</strong>
                                                 <form action="{{ route('login') }}" method="POST">
                                                 @csrf
                                                     <div class="form-group">
@@ -74,6 +75,17 @@
                                                         <label>Password:</label>
                                                         <input type="password" name="password" class="form-control" required>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <div class="offset-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                                            <label class="form-check-label" for="remember">
+                                                                {{ __('Remember Me') }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-sm btn-info">Login</button>
                                                     </div>
@@ -82,11 +94,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">Registration<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">Taka</a></li>
-                                            <li><a href="#">USD</a></li>
-                                        </ul>
+                                        <a href="{{ route('register') }}">Registration</a>
                                     </li>
                                 </ul>
                             </div>
@@ -110,7 +118,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2 col-sm-3 col-3 order-1">
                         <div class="logo_container">
-                            <div class="logo"><a href="#">FRF Shop</a></div>
+                            <div class="logo"><a href="{{ url('/') }}">FRF Shop</a></div>
                         </div>
                     </div>
 
