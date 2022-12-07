@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 08:11 PM
+-- Generation Time: Dec 07, 2022 at 08:32 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -45,8 +45,19 @@ INSERT INTO `brands` (`id`, `brand_name`, `brand_slug`, `brand_logo`, `front_pag
 (3, 'Easy', 'easy', 'public/files/brand/easy.jpg', NULL, NULL, NULL),
 (4, 'Freeland', 'freeland', 'public/files/brand/freeland.png', NULL, NULL, NULL),
 (5, 'Gentle Park', 'gentle-park', 'public/files/brand/gentle-park.jpg', NULL, NULL, NULL),
-(6, 'Zaara', 'zaara', 'public/files/brand/zaara.png', NULL, NULL, NULL),
-(7, 'Aarong', 'aarong', 'public/files/brand/aarong.jpg', NULL, NULL, NULL);
+(7, 'Aarong', 'aarong', 'public/files/brand/aarong.jpg', NULL, NULL, NULL),
+(8, 'Canon', 'canon', 'public/files/brand/canon.png', NULL, NULL, NULL),
+(9, 'Nike', 'nike', 'public/files/brand/nike.jpg', NULL, NULL, NULL),
+(10, 'Plus Point', 'plus-point', 'public/files/brand/plus-point.jpg', NULL, NULL, NULL),
+(11, 'Zara', 'zara', 'public/files/brand/zara.jpg', NULL, NULL, NULL),
+(12, 'Toyota', 'toyota', 'public/files/brand/toyota.jpg', NULL, NULL, NULL),
+(13, 'Honda', 'honda', 'public/files/brand/honda.png', NULL, NULL, NULL),
+(14, 'China', 'china', 'public/files/brand/china.jpg', NULL, NULL, NULL),
+(15, 'One Plus', 'one-plus', 'public/files/brand/one-plus.png', NULL, NULL, NULL),
+(16, 'Xiaomi', 'xiaomi', 'public/files/brand/xiaomi.png', NULL, NULL, NULL),
+(17, 'Apple', 'apple', 'public/files/brand/apple.png', NULL, NULL, NULL),
+(18, 'Yamaha', 'yamaha', 'public/files/brand/yamaha.png', NULL, NULL, NULL),
+(19, 'Suzuki', 'suzuki', 'public/files/brand/suzuki.jpg', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +80,9 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
 (9, 'Mens Fashion', 'mens-fashion', NULL, NULL),
 (10, 'Womens Fashion', 'womens-fashion', NULL, NULL),
-(12, 'Kids Fashion', 'kids-fashion', NULL, NULL);
+(12, 'Kids Fashion', 'kids-fashion', NULL, NULL),
+(13, 'Electronics', 'electronics', NULL, NULL),
+(14, 'Vehicle', 'vehicle', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -121,7 +134,16 @@ INSERT INTO `childcategories` (`id`, `category_id`, `subcategory_id`, `childcate
 (32, 9, 8, 'Coller', 'coller', NULL, NULL),
 (33, 9, 7, 'Gabardine', 'gabardine', NULL, NULL),
 (34, 9, 7, 'Jeans', 'jeans', NULL, NULL),
-(35, 9, 7, 'Formal Pant', 'formal-pant', NULL, NULL);
+(35, 9, 7, 'Formal Pant', 'formal-pant', NULL, NULL),
+(36, 13, 22, 'OnePlus', 'oneplus', NULL, NULL),
+(37, 13, 22, 'Xiaomi', 'xiaomi', NULL, NULL),
+(38, 13, 22, 'Realme', 'realme', NULL, NULL),
+(39, 13, 25, 'Canon', 'canon', NULL, NULL),
+(40, 13, 25, 'Laptop', 'laptop', NULL, NULL),
+(41, 14, 21, 'Honda', 'honda', NULL, NULL),
+(42, 13, 22, 'Iphone', 'iphone', NULL, NULL),
+(43, 14, 21, 'Suzuki', 'suzuki', NULL, NULL),
+(44, 14, 21, 'Yamaha', 'yamaha', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -316,12 +338,13 @@ CREATE TABLE `products` (
   `discount_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `stock_quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `warehouse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `images` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `featured` int(11) DEFAULT NULL,
   `today_deal` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
+  `product_slider` int(11) DEFAULT NULL,
   `flash_deal_id` int(11) DEFAULT NULL,
   `cash_on_delivery` int(11) DEFAULT NULL,
   `admin_id` int(11) DEFAULT NULL,
@@ -335,8 +358,15 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `size`, `color`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `month`, `date`, `created_at`, `updated_at`) VALUES
-(1, 9, 6, 6, 3, 1, 'FFR rrf', 'ffr-rrf', '963', 'pcs', 'shirt,men', 'M,XL', 'Black', NULL, '1000', '1500', '300', '10', 'F w name', '<p>asdadad ad</p>', 'ffr-rrf.jpg', '[\"1751037156792880.jpg\"]', 1, 1, 1, NULL, NULL, 1, 'December', '01-12-2022', NULL, NULL);
+INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `size`, `color`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `month`, `date`, `created_at`, `updated_at`) VALUES
+(1, 9, 6, 6, 3, 1, 'FFR rrf', 'ffr-rrf', '963', 'pcs', 'shirt,men', 'M,XL', 'Black', NULL, '1000', '1500', '300', '10', 'F w name', '<p>asdadad ad</p>', 'ffr-rrf.jpg', '[\"1751037156792880.jpg\"]', 1, 1, 1, 0, NULL, NULL, 1, 'December', '01-12-2022', NULL, NULL),
+(2, 13, 22, 36, 15, 1, 'OnePlus 9 Pro SD 888', 'oneplus-9-pro-sd-888', 'CP-68239', 'pcs', 'phone,oneplus,mobile', '197g, 8.7mm thickness', 'Morning Mist, Forest Green, Stellar Black', NULL, '40,000', '55,000', '5,000', '10', 'Nagua', '<p><span style=\"color: rgb(51, 51, 51); font-family: Tahoma, Helvetica, Arial, sans-serif; font-size: 14px;\">OnePlus 9 Pro internal storage base variant of 8 GB, 12 GB Ram, 128 GB, 256 GB Internal Memory (ROM). OnePlus 9 Pro which is available in Morning Mist, Forest Green, Stellar Black colour.</span><br></p>', 'oneplus-9-pro-sd-888.jpg', '[\"1751477813612525.jpg\"]', 1, 1, 1, 1, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(3, 14, 21, 41, 13, 1, 'Honda CBR150R Repsol ABS', 'honda-cbr150r-repsol-abs', 'H-951753', 'pcs', 'honda,bike', NULL, 'Orange', NULL, '50,000', '60,000', '55,000', '10', 'Nagua', '<p>This is Honda bike</p>', 'honda-cbr150r-repsol-abs.jpg', '[\"1751479253903396.jpg\",\"1751479253962867.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(4, 9, 12, 23, 14, 1, 'Lather Shoe Loofer', 'lather-shoe-loofer', 'LS-487631', 'pcs', 'shoe,loofer', 'M,XL', 'Black,Grey', NULL, '1,500', '2,500', '2,000', '15', 'Puranthana', '<p>this is shoe</p>', 'lather-shoe-loofer.jpg', '[\"1751479679832695.jpg\",\"1751479679892823.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(5, 10, 13, 14, 3, 1, 'Women Stylish Shoe', 'women-stylish-shoe', 'ws-367418', 'pcs', 'shoe,women', 'M,XL', 'Black,Grey', NULL, '2,500', '3,500', '3,000', '12', 'Nagua', '<p>this is women shoe</p>', 'women-stylish-shoe.jpg', '[\"1751479874879421.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(6, 10, 13, 14, 4, 1, 'Women Normal Shoe', 'women-normal-shoe', 'ws-475819', 'pcs', 'shoe,women', 'M,XL', 'Black,Grey', NULL, '2,000', '3,000', '2,500', '14', 'Nagua', '<p>thi is women shoe</p>', 'women-normal-shoe.jpg', '[\"1751480010150782.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(7, 13, 22, 42, 17, 1, 'Iphone 9 256GB', 'iphone-9-256gb', 'ip-714638', 'pcs', 'phone,mobile,iphone', '197g, 8.7mm thickness', 'Orange', NULL, '70,000', '85,000', '80,000', '12', 'Nagua', '<p>this is iphone</p>', 'iphone-9-256gb.jpg', '[\"1751480198947767.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(8, 14, 21, 43, 19, 1, 'Suzuki New Bike', 'suzuki-new-bike', 'sb-463297', 'pcs', 'bike,suzuki', NULL, 'Blue', NULL, '3,00000', '3,60,000', '3,50,000', '15', 'Nagua', '<p>this is bike</p>', 'suzuki-new-bike.jpg', '[\"1751480737600960.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -429,7 +459,13 @@ INSERT INTO `subcategories` (`id`, `category_id`, `subcategory_name`, `subcat_sl
 (16, 12, 'Full Pant', 'full-pant', NULL, NULL),
 (17, 12, 'Half Pant', 'half-pant', NULL, NULL),
 (18, 12, 'Shoe [Kids]', 'shoe-kids', NULL, '2022-12-01 04:51:45'),
-(19, 9, 'Half Pant', 'half-pant', NULL, NULL);
+(19, 9, 'Half Pant', 'half-pant', NULL, NULL),
+(20, 14, 'Car', 'car', NULL, NULL),
+(21, 14, 'Bike', 'bike', NULL, NULL),
+(22, 13, 'Phone', 'phone', NULL, NULL),
+(23, 13, 'Computer', 'computer', NULL, NULL),
+(24, 13, 'Laptop', 'laptop', NULL, NULL),
+(25, 13, 'Camera', 'camera', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -456,7 +492,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone`, `is_admin`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Farhan', 'farhan@gmail.com', NULL, '$2y$10$qSO3KnAbHh60TncxN746mOcGZSTK0l2xiusIQJ/heDKL/NpfQy0eu', '01675717825', 1, NULL, '2022-11-14 04:46:48', '2022-11-23 00:19:06'),
-(2, 'Customer', 'customer@gmail.com', NULL, '$2y$10$VLUg6FJ.BS8kCGm59V7MS.zV2o0pAcZOGkWNr7Pw7uJ4b928/U84S', NULL, NULL, 'ZtJCIxQjAtMyOAaLaThpSxh2tEYtpM8sjjI5GVNZP2zoFx5HZ8imqDDQWUGB', '2022-11-14 05:12:16', '2022-11-14 12:34:01');
+(2, 'Customer', 'customer@gmail.com', NULL, '$2a$12$5SE8AcivBdF307UCMdymE.lFWPDVnbF7zHx8FTlbwnf4uvXm5WAS2', NULL, NULL, 'XlTtMV3mdKDJnWrZNuMIgsSrKi6Q9qzWtfz71FB68yDO5QS2GaysAVJhxnEZ', '2022-11-14 05:12:16', '2022-11-14 12:34:01'),
+(3, 'Rabbani', 'Rabbani@gmail.com', NULL, '$2y$10$tkeCKVmYMWHB4KNn9oJTOuRidx84yBbNUfeAwDlxox4rKT2aMXWFy', NULL, NULL, NULL, '2022-12-06 05:29:08', '2022-12-06 05:29:08');
 
 -- --------------------------------------------------------
 
@@ -478,9 +515,9 @@ CREATE TABLE `warehouses` (
 --
 
 INSERT INTO `warehouses` (`id`, `warehouse_name`, `warehouse_address`, `warehouse_phone`, `created_at`, `updated_at`) VALUES
-(1, 'F w name', 'F w add', '016', NULL, NULL),
-(3, 'trt', 'fghfgh', '879845', NULL, NULL),
-(4, 'tytry', 'fjvbn', '36451', NULL, NULL);
+(1, 'Nagua', 'Nagua, Kishoreganj', '016', NULL, NULL),
+(3, 'Gaital', 'Gaital, Kishoreganj', '879845', NULL, NULL),
+(4, 'Puranthana', 'Puranthana, Kishoreganj', '36451', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -599,19 +636,19 @@ ALTER TABLE `warehouses`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `childcategories`
 --
 ALTER TABLE `childcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -653,7 +690,7 @@ ALTER TABLE `pickup_point`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `seos`
@@ -671,13 +708,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `warehouses`

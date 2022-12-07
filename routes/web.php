@@ -30,4 +30,5 @@ Route::get('/customer/logout', [App\Http\Controllers\HomeController::class, 'log
 Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::get('/','IndexController@index');
     Route::get('/product-details/{slug}','IndexController@productDetails')->name('product.details');
+    Route::get('/product-quick-view/{id}','IndexController@ProductQuickView');
 });

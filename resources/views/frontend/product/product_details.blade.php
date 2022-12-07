@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('frontend_content')
+@section('content')
 		<!-- Menu -->
 @include('layouts.frontend_bar.collaps_nav')
 	<!-- Single Product -->
