@@ -31,4 +31,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::get('/','IndexController@index');
     Route::get('/product-details/{slug}','IndexController@productDetails')->name('product.details');
     Route::get('/product-quick-view/{id}','IndexController@ProductQuickView');
+
+    //Cart
+    Route::get('/all-cart','CartController@allCart')->name('all.cart');
+    Route::post('/addtocart','CartController@AddToCartQV')->name('add.to.cart.quickview');
 });

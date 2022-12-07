@@ -53,8 +53,9 @@
               	</div>
 
               	<br>
+                
                  <div class="order_info d-flex flex-row">
-                    <form action="#" method="post" id="add_cart_form">
+                    <form action="{{ route('add.to.cart.quickview') }}" method="post" id="add_cart_form">
                       @csrf
                       {{-- cart add details --}}
                       <input type="hidden" name="id" value="{{$product->id}}">
@@ -123,7 +124,7 @@ $('.loader').ready(function() {
 </script>  
 
 <script type="text/javascript">
-  //store coupon ajax call
+  //store add to cart ajax call
   $('#add_cart_form').submit(function(e){
     e.preventDefault();
     $('.loading').removeClass('d-none');
