@@ -10,6 +10,21 @@ use DB;
 
 class CartController extends Controller
 {   
+    //All Cart
+    public function allCart()
+    {
+        $data=array();
+        $data['cart_qty']=Cart::count();
+        $data['cart_total']=Cart::total();
+        return response()->json($data);
+    }
+
+    public function myCart()
+    {
+        $content=Cart::content();
+        return view('frontend.cart.my_cart',compact('content'));
+    }
+
     //Add to cart QuickView
     public function AddToCartQV(Request $request)
     {   
@@ -24,18 +39,17 @@ class CartController extends Controller
             'qty'=>$request->qty,
             'price'=>$request->price,
             'weight'=>'1',
-            'options'=>['size'=>$request->size, 'color'=>$request->color, 'thumbnail'=>$request->thumbnail]
+            'options'=>['size'=>$request->size, 'color'=>$request->color, 'thumbnail'=>$product->thumbnail]
         ]);
 
         return response()->json("Add to cart success");
     }
 
-    //All Cart
-    public function allCart()
+    //Empty Cart
+    public function emptyCart()
     {
-        $data=array();
-        $data['cart_qty']=Cart::count();
-        $data['cart_total']=Cart::total();
-        return response()->json($data);
+        Cart::destroy();
+        $notification=array('messege' => 'Cart item clear', 'alert-type' => 'success');
+        return redirect()->to('/')->with($notification); 
     }
 }

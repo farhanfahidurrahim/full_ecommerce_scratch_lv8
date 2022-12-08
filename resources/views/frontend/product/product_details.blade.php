@@ -47,7 +47,14 @@
             				@endif
 						{{-- <div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div> --}}
 						<div class="order_info d-flex flex-row">
-							<form action="#">
+							<form action="{{ route('add.to.cart.quickview') }}" method="post" id="add_to_cart">
+								@csrf
+								<input type="hidden" name="id" value="{{$product->id}}">
+								@if($product->discount_price==NULL)
+								<input type="hidden" name="price" value="{{$product->selling_price}}">
+								@else
+								<input type="hidden" name="price" value="{{$product->discount_price}}">
+								@endif
 								<div class="form-group">
 									<div class="row">
 										@isset($product->size)
@@ -78,7 +85,7 @@
 									<!-- Product Quantity -->
 									<div class="product_quantity clearfix ml-2">
 										<span>Quantity: </span>
-										<input id="quantity_input" type="text" pattern="[1-9]*" value="1">
+										<input id="quantity_input" type="text" name="qty" pattern="[1-9]*" value="1">
 										<div class="quantity_buttons">
 											<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
 											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
@@ -87,10 +94,13 @@
 								</div>
 								
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
+									@if($product->stock_quantity<1)
+									<button class="button cart_button btn btn-outline-danger" disabled>Stock Out</button>
+									@else
+									<button type="submit" class="button cart_button"> <span class="loading d-none">...</span> Add to Cart</button>
+									@endif
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								
 							</form>
 						</div>
 					</div>
@@ -241,44 +251,33 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Brands -->
 
-	<div class="brands">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="brands_slider_container">
-						
-						<!-- Brands Slider -->
 
-						<div class="owl-carousel owl-theme brands_slider">
-							
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_1.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_2.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_3.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_4.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_5.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_6.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_7.jpg" alt=""></div></div>
-							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend') }}/images/brands_8.jpg" alt=""></div></div>
-
-						</div>
-						
-						<!-- Brands Slider Navigation -->
-						<div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-						<div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	 //add cart details page, ajax call
+ 	$('#add_to_cart').submit(function(e){
+	    e.preventDefault();
+	    var url = $(this).attr('action');
+	    var request =$(this).serialize();
+	    $.ajax({
+	       	url:url,
+	       	type:'post',
+	       	async:false,
+	       	data:request,
+	       	success:function(data){
+	         toastr.success(data);
+	         $('#add_to_cart')[0].reset();
+	         cart();
+	     	}
+        });
+  	});
+</script>
 
 @endsection

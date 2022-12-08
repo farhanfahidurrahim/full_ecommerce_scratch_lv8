@@ -33,6 +33,14 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::get('/product-quick-view/{id}','IndexController@ProductQuickView');
 
     //Cart
-    Route::get('/all-cart','CartController@allCart')->name('all.cart');
+    Route::get('/all-cart','CartController@allCart')->name('all.cart'); //ajax req for frontend
+    Route::get('/my-cart','CartController@myCart')->name('cart');
+    Route::get('/empty-cart','CartController@emptyCart')->name('cart.empty');
     Route::post('/addtocart','CartController@AddToCartQV')->name('add.to.cart.quickview');
+
+    Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+
+    //Setting Profile
+    Route::get('/home/setting','ProfileController@setting')->name('customer.setting');
+    Route::post('/home/password/update','ProfileController@passwordChange')->name('customer.passwordchange');
 });

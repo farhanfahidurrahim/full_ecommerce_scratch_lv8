@@ -94,18 +94,17 @@
                                 </div>
                             </div>
                         <div class="button_container">
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                              	@if($product->stock_quantity<1)
-                              	<span class="text-danger">Stock Out</span>
-                              	@else
-                                <button class="btn btn-sm btn-outline-info" type="submit" style="float: right;">
-                               <span class="loading d-none">....</span> Add to cart</button>
-                                @endif
+                              <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                  	@if($product->stock_quantity<1)
+                                  	<span class="text-danger">Stock Out</span>
+                                  	@else
+                                    <button class="btn btn-sm btn-outline-info" type="submit" style="float: right;">
+                                   <span class="loading d-none">....</span> Add to cart</button>
+                                    @endif
+                                  </div>
                               </div>
-                            </div>
                         </div>
-                        
                     </form>
                  </div>
               </div>
@@ -124,7 +123,7 @@ $('.loader').ready(function() {
 </script>  
 
 <script type="text/javascript">
-  //store add to cart ajax call
+  //quick view add to cart ajax call
   $('#add_cart_form').submit(function(e){
     e.preventDefault();
     $('.loading').removeClass('d-none');

@@ -37,20 +37,20 @@
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Current Password</label>
-	                    <input type="password" name="old_password" class="form-control" id="exampleInputEmail1" placeholder="Current Password">
+	                    <input type="password" name="old_password" class="form-control" id="exampleInputEmail1" placeholder="Current Password" required>
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="exampleInputPassword1">New Password</label>
-	                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="New Password">
+	                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="New Password" required>
 	                    @error('password')
 		                    <span class="invalid-feedback" role="alert">
 		                        <strong>{{ $message }}</strong>
 		                    </span>
-		                @enderror
+		                	@enderror
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="exampleInputPassword1">Confirm Password</label>
-	                    <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+	                    <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password" required>
 	                  </div>
 	                </div>
 	                <!-- /.card-body -->
