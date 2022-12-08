@@ -44,4 +44,5 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     //Setting Profile
     Route::get('/home/setting','ProfileController@setting')->name('customer.setting');
     Route::post('/home/password/update','ProfileController@passwordChange')->name('customer.passwordchange');
+    Route::get('/my-order','ProfileController@myOrder')->name('my.order');
 });
