@@ -50,6 +50,7 @@
                                         <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
                                         <ul style="width:200px;">
                                             <li><a href="{{ route('home') }}">Profile</a></li>
+                                            <li><a href="{{ route('customer.setting') }}">Setting</a></li>
                                             <li><a href="{{ route('customer.logout') }}">Logout</a></li>
                                         </ul>
                                     </li>

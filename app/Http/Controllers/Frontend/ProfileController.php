@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $old_password=$request->old_password; //Old Pass 
         $new_password=$request->password; //New Pass
 
-        if (Hash::check($old_password,$current_password)) { //check for oldpassword and currentuser password same or not
+        if (Hash::check($old_password,$current_password)) { //check for oldpassword and current user password same or not
             $user=User::findorfail(Auth::id());
             $user->password=Hash::make($request->password);
             $user->save();
