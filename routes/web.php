@@ -39,6 +39,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::post('/addtocart','CartController@AddToCartQV')->name('add.to.cart.quickview');
 
     Route::get('/checkout','CheckoutController@checkout')->name('checkout');
+    Route::post('/order/place','CheckoutController@orderPlace')->name('order.place');
 
     //Setting Profile
     Route::get('/home/setting','ProfileController@setting')->name('customer.setting');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProductSliderToProductsTable extends Migration
+class AddSubtotalPriceToOrderDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddProductSliderToProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('product_slider')->after('status')->nullable();
+        Schema::table('order_details', function (Blueprint $table) {
+            $table->string('subtotal_price')->after('single_price');
         });
     }
 
@@ -25,7 +25,7 @@ class AddProductSliderToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('order_details', function (Blueprint $table) {
             //
         });
     }
