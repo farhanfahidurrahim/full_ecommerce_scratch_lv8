@@ -90,4 +90,26 @@ class SettingController extends Controller
         $notification=array('messege' => 'Website Setting Updated!', 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }
+
+    //__Payment_Gateway__
+    public function paymentGateway()
+    {
+        $aamarpay=DB::table('payment_gateway_bd')->first();
+        $surjopay=DB::table('payment_gateway_bd')->first();
+        $ssl=DB::table('payment_gateway_bd')->first();
+
+        return view('admin.payment_gateway_bd.edit',compact('aamarpay','surjopay','ssl'));
+    }
+
+    public function aamarpayUpdate(Request $request)
+    {
+        $data=array();
+        $data['store_id']=$request->store_id;
+        $data['signature_key']=$request->signature_key;
+        $data['status']=$request->status;
+
+        DB::table('payment_gateway_bd')->where('id',$request->id)->update($data);
+        $notification=array('messege' => 'Aamarpay Payment gateway Updated!', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
 }

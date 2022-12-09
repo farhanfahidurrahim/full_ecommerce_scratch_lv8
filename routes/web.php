@@ -45,4 +45,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::get('/home/setting','ProfileController@setting')->name('customer.setting');
     Route::post('/home/password/update','ProfileController@passwordChange')->name('customer.passwordchange');
     Route::get('/my-order','ProfileController@myOrder')->name('my.order');
+
+    //__Payment Gateway
+    Route::post('/success','CheckoutController@success')->name('success');
+    Route::post('/fail','CheckoutController@fail')->name('fail');
+    
 });

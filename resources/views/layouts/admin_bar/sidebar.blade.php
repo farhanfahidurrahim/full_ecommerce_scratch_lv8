@@ -176,7 +176,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="{{ route('payment.gateway') }}" class="nav-link">
                   <i class="nav-icon far fa-circle text-danger"></i>
                   <p class="text">Payment Gateway</p>
                 </a>

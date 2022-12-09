@@ -120,6 +120,12 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 			Route::post('/update/{id}','PageController@update')->name('page.update');
 			Route::get('/delete/{id}','PageController@destroy')->name('page.destroy');
 		});
+
+		//__Payment Gateway
+		Route::group(['prefix'=>'payment-gateway'], function(){
+			Route::get('/','SettingController@paymentGateway')->name('payment.gateway');
+			Route::post('/aamarpay/update','SettingController@aamarpayUpdate')->name('paygate.aamarpay.update');
+		});
 	});
 
 
