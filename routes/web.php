@@ -56,3 +56,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
 
 
 });
+
+//Socialite - Google
+    Route::get('oauth/{driver}', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])->name('social.oauth');
+    Route::get('oauth/{driver}/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback'])->name('social.callback');
