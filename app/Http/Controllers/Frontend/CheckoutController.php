@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Cart;
 use DB;
+use Mail;
+use App\Mail\InvoiceMail;
 
 class CheckoutController extends Controller
 {
@@ -29,7 +31,6 @@ class CheckoutController extends Controller
         //Validation baki ase------//
 
         if ($request->payment_type=="Hand Cash") {
-            // code...
             $order=array();
             $order['user_id']=Auth::id();
             $order['c_name']=$request->c_name;
@@ -61,6 +62,8 @@ class CheckoutController extends Controller
 
             $order_id=DB::table('orders')->insertGetId($order);
 
+            Mail::to($request->c_email)->send(new InvoiceMail($order));
+
             //order details
             $content=Cart::content();
 
@@ -79,10 +82,11 @@ class CheckoutController extends Controller
             }
 
             Cart::destroy();
-            $notification=array('messege' => 'Successfully Order Placed [Hand Cash]!', 'alert-type' => 'success');
+            $notification=array('messege' => 'Successfully Order Placed by Handcash', 'alert-type' => 'success');
             return redirect()->to('/')->with($notification);
 
-        //Aamarpay Payment Gateway
+        //___Aamarpay Payment Gateway___
+
         }elseif($request->payment_type=="Aamarpay"){
             
             $aamarpay=DB::table('payment_gateway_bd')->first();
@@ -122,11 +126,11 @@ class CheckoutController extends Controller
                     'desc' => 'payment description', 
                     'success_url' => route('success'), //your success route
                     'fail_url' => route('fail'), //your fail route
-                    'cancel_url' => 'http://localhost/foldername/cancel.php', //your cancel url
-                    'opt_a' => Cart::subtotal(),  //optional paramter
-                    'opt_b' => $request->payment_type,
-                    'opt_c' => Auth::id(), 
-                    'opt_d' => rand(10000,900000),
+                    'cancel_url' => route('cancel'), //your cancel url
+                    'opt_a' => $request->c_country,  //optional paramter
+                    'opt_b' => $request->c_city,
+                    'opt_c' => $request->c_phone, 
+                    'opt_d' => $request->c_address,
                     'signature_key' => $aamarpay->signature_key); //signature key will provided aamarpay, contact integration@aamarpay.com for test/live signature key
 
                 $fields_string = http_build_query($fields);
@@ -163,8 +167,59 @@ class CheckoutController extends Controller
         exit;
     } 
 
+    //___Payment Gateway Data Insert into DB
     public function success(Request $request){
-        return $request;
+        $order=array();
+            $order['user_id']=Auth::id();
+            $order['c_name']=$request->cus_name;
+            $order['c_phone']=$request->opt_c;
+            $order['c_country']=$request->opt_a;
+            $order['c_address']=$request->opt_d;
+            $order['c_email']=$request->cus_email;
+            $order['c_city']=$request->opt_b;
+            //if(Session::has('coupon')){
+            //    $order['subtotal']=Cart::subtotal();
+            //    $order['coupon_code']=Session::get('coupon')['name'];
+            //    $order['coupon_discount']=Session::get('coupon')['discount'];
+           //     $order['after_dicount']=Session::get('coupon')['after_discount'];
+            //}else{
+            //    $order['subtotal']=Cart::subtotal();
+                
+            //}
+            $order['total']=Cart::total();
+            $order['payment_type']='Aamarpay';
+            $order['tax']=0;
+            $order['shipping_charge']=0;
+            $order['order_id']=rand(10000,900000);
+            $order['status']=1;
+            $order['date']=date('d-m-Y');
+            $order['month']=date('F');
+            $order['year']=date('Y');
+
+            $order_id=DB::table('orders')->insertGetId($order);
+
+            Mail::to(Auth::user()->email)->send(new InvoiceMail($order));
+
+            //order details
+            $content=Cart::content();
+
+            $details=array();
+            foreach($content as $row){
+                $details['order_id']=$order_id;
+                $details['product_id']=$row->id;
+                $details['product_name']=$row->name;
+                $details['color']=$row->options->color;
+                $details['size']=$row->options->size;
+                $details['quantity']=$row->qty;
+                $details['single_price']=$row->price;
+                $details['subtotal_price']=$row->price*$row->qty;
+
+                DB::table('order_details')->insert($details);
+            }
+
+            Cart::destroy();
+            $notification=array('messege' => 'Successfully Order Placed by Online!', 'alert-type' => 'success');
+            return redirect()->route('home')->with($notification);
     }
 
     public function fail(Request $request){

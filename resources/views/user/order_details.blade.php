@@ -28,12 +28,12 @@
                                  <span class="badge badge-danger">Order Cancel</span>
                               @endif   <br>	
                 	Date: {{ date('d F Y'),strtotime($order->c_name)}} <br>	
-                	Subtotal: {{ $order->subtotal }} {{ $setting->currency }}<br>	
-                	Total: {{ $order->total }} {{ $setting->currency }}<br>
+                	{{-- Subtotal: {{ $order->subtotal }} {{ $setting->currency }}<br>	 --}}
+                	Total:$ {{ $order->total }}<br>
 
                 </div>
                 <div class="card-body">
-                   <h4>My Order</h4>
+                   <h4>Order Details</h4>
                    <div>
                        <table class="table">
                          <thead>
@@ -55,12 +55,13 @@
                              <td>{{ $row->color }} </td>
                              <td>{{ $row->size }}</td>
                              <td>{{ $row->quantity }}</td>
-                             <td>{{ $row->single_price }} {{ $setting->currency }}</td>
-                             <td>{{ $row->subtotal_price }} {{ $setting->currency }}</td>
+                             <td>$ {{ $row->single_price }}</td>
+                             <td>$ {{ $row->subtotal_price }}</td>
                            </tr>
                           @endforeach 
                          </tbody>
                        </table>
+                       <button class="btn btn-info"><a href="{{ route('my.order') }}">My Order</a></button>
                    </div>
                 </div>
 
