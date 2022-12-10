@@ -66,6 +66,14 @@
             </ul>
           </li>
 
+          <li class="nav-header">Orders List</li>
+          <li class="nav-item">
+            <a href="{{ route('admin.order.index') }}" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p class="text">Pending Order</p>
+            </a>
+          </li>
+
           <li class="nav-header">Divison</li>
           <li class="nav-item">
             <a href="{{ route('category.index') }}" class="nav-link">

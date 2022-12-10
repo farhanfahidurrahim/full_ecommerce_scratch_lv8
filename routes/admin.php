@@ -82,7 +82,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::get('/delete/{id}','CouponController@destroy')->name('coupon.delete');
 	});
 
-	//Product routes...
+	//___Product routes...
 	Route::group(['prefix'=>'product'], function(){
 		Route::get('/','ProductController@index')->name('product.index');
 		Route::get('/create','ProductController@create')->name('product.create');
@@ -95,6 +95,15 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 		Route::get('/not-deal/{id}','ProductController@notdeal');
 		Route::get('/yes-status/{id}','ProductController@yesstatus');
 		Route::get('/not-status/{id}','ProductController@notstatus');
+	});
+
+	//__Order routes...
+	Route::group(['prefix'=>'orders'], function(){
+		Route::get('/','OrderController@index')->name('admin.order.index');
+		//Route::post('/store','CouponController@store')->name('coupon.store');
+		// Route::get('/edit/{id}','WarehouseController@edit');
+		// Route::post('/update','WarehouseController@update')->name('warehouse.update');
+		//Route::get('/delete/{id}','CouponController@destroy')->name('coupon.delete');
 	});
 
 	//Setting routes...
