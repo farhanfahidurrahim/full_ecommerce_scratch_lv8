@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceMail extends Mailable
+class ReceivedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,7 +16,7 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    
+
     public $order;
 
     public function __construct($order)
@@ -31,6 +31,6 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Invoice From FRF E-Shop')->view('mail.email_invoice');
+        return $this->subject('Mail From FRF E-Shop')->view('mail.email_received');
     }
 }

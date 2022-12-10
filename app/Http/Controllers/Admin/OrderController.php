@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use DB;
 use DataTables;
 use Auth;
-use Image;
-use App\Models\Product;
+use Mail;
+use App\Mail\ReceivedMail;
 
 class OrderController extends Controller
 {
@@ -69,7 +69,7 @@ class OrderController extends Controller
                         return '<a href="#" class="active_featured"></span> <span class="badge badge-warning">Receivd</span></a>';
                     }
                     elseif($row->status==2){
-                        return '<a href="#" class="active_featured">|</span> <span class="badge badge-warning">Shipped</span></a>';
+                        return '<a href="#" class="active_featured"></span> <span class="badge badge-warning">Shipped</span></a>';
                     }
                     elseif($row->status==3){
                         return '<a href="#" class="active_featured"></span> <span class="badge badge-success">Completed</span></a>';
@@ -83,9 +83,10 @@ class OrderController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $actionbtn='
-                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                        <a href="'.route('product.edit',[$row->id]).'" class="btn btn-info btn-sm edit"><i class="fas fa-edit"></i></a> 
-                        <a href="'.route('product.delete',[$row->id]).'" class="btn btn-danger btn-sm" id="delete"><i class="fas fa-trash"></i>
+                        <a href="#" data-id="'.$row->id.'" class="btn btn-primary btn-sm view" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"></i></a>
+                        <a href="#" data-id="'.$row->id.'" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></a> 
+                        <a href="#" data-id="'.$row->id.'" class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#editModal"><i class="fas fa-trash"></i></a> 
+                        
                         </a>';
 
                     return $actionbtn;
@@ -93,13 +94,32 @@ class OrderController extends Controller
                 ->rawColumns(['action','status'])
                 ->make(true);
         }
-
-        $category=DB::table('categories')->get(); //Query Builder
-        $subcategory=DB::table('subcategories')->get();
-        $brand=DB::table('brands')->get();
-        $warehouse=DB::table('warehouses')->get();
-        //$category=Category::all(); // If Model
         
         return view('admin.order.order_index');
+    }
+
+    //__Edit Order
+    public function edit($id)
+    {
+        $order=DB::table('orders')->where('id',$id)->first();
+        return view('admin.order.order_edit',compact('order'));
+    }
+
+    //Update Order
+    public function update(Request $request)
+    {
+        $data=array();
+        $data['c_name']=$request->c_name;
+        $data['c_email']=$request->c_email;
+        //$data['c_address']=$request->c_address;
+        //$data['c_phone']=$request->c_phone;
+        $data['status']=$request->status;
+
+        if($request->status=='1'){
+            Mail::to($request->c_email)->send(new ReceivedMail($data));
+        }
+        
+        DB::table('orders')->where('id',$request->id)->update($data);
+        return response()->json('successfully changed status!');
     }
 }

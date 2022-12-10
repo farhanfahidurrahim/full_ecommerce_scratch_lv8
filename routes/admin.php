@@ -101,8 +101,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware' => 'is_admi
 	Route::group(['prefix'=>'orders'], function(){
 		Route::get('/','OrderController@index')->name('admin.order.index');
 		//Route::post('/store','CouponController@store')->name('coupon.store');
-		// Route::get('/edit/{id}','WarehouseController@edit');
-		// Route::post('/update','WarehouseController@update')->name('warehouse.update');
+		Route::get('/admin/edit/{id}','OrderController@edit');
+		Route::post('/update/order/status','OrderController@update')->name('update.order.status');
 		//Route::get('/delete/{id}','CouponController@destroy')->name('coupon.delete');
 	});
 

@@ -28,36 +28,10 @@
                 			<h3 class="card-title">Customers Order List Here</h3>
               			</div>
               			<div class="row p-3">
-              				{{-- <div class="form-group col-2">
-              					<label>Catgory</label>
-              					<select class="form-control submitable" name="category_id" id="category_id">
-              						<option value="">All</option>
-              						@foreach($category as $row)
-              						<option value="{{ $row->id }}">{{ $row->category_name }}</option>
-              						@endforeach
-              					</select>
-              				</div>
-              				<div class="form-group col-2">
-              					<label>Brand</label>
-              					<select class="form-control submitable" name="brand_id" id="brand_id">
-              						<option value="">All</option>
-              						@foreach($brand as $row)
-              						<option value="{{ $row->id }}">{{ $row->brand_name }}</option>
-              						@endforeach
-              					</select>
-              				</div>
-              				<div class="form-group col-2">
-              					<label>Warehouse</label>
-              					<select class="form-control submitable" name="warehouse" id="warehouse">
-              						<option value="">All</option>
-              						@foreach($warehouse as $row)
-              						<option value="{{ $row->warehouse_name }}">{{ $row->warehouse_name }}</option>
-              						@endforeach
-              					</select>
-              				</div> --}}
               				<div class="form-group col-2">
               					<label>Status Search</label>
               					<select class="form-control submitable" name="status" id="status">
+              						<option >All</option>
 	              						<option value="0">Pending</option>
 	              						<option value="1">Received</option>
 	              						<option value="2">Shipped</option>
@@ -109,7 +83,43 @@
 	</section>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Order Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div id="modal_body">
+        
+     </div> 
+    </div>
+  </div>
+</div>
+<!-- View Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div id="view_modal_body">
+        
+     </div> 
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 	//Without Filter
 	// $(function products(){
@@ -132,6 +142,7 @@
 	// 		]
 	// 	});
 	// });
+
 
 	//With Filter
 	$(function products(){
@@ -162,12 +173,20 @@
 		});
 	});
 
-	//filter search : class="submitable" call for Status
-	$(document).on('change','.submitable', function(){
-		$('.ytable').DataTable().ajax.reload();
-	});
+	//order edit
+	$('body').on('click','.edit', function(){
+	    var id=$(this).data('id');
+		var url = "{{ url('orders/admin/edit') }}/"+id;
+		$.ajax({
+			url:url,
+			type:'get',
+			success:function(data){  
+	         $("#modal_body").html(data);
+	      }
+	  });
+    });
 
-	//filter search : class="submitable" call for Payment Type
+	//filter search : class="submitable" call for every change
 	$(document).on('change','.submitable', function(){
 		$('.ytable').DataTable().ajax.reload();
 	});
@@ -177,32 +196,6 @@
 		$('.ytable').DataTable().ajax.reload();
 	});
 
-    //deactive Status
-	$('body').on('click','.deactive_status', function(){
-	    var id=$(this).data('id');
-		var url = "{{ url('product/not-status') }}/"+id;
-		$.ajax({
-			url:url,
-			type:'get',
-			success:function(data){  
-	        toastr.success(data);
-	        table.ajax.reload();
-	      }
-	  	});
-    });
-    //active Status
-	$('body').on('click','.active_status', function(){
-	    var id=$(this).data('id');
-		var url = "{{ url('product/yes-status') }}/"+id;
-		$.ajax({
-			url:url,
-			type:'get',
-			success:function(data){  
-	        toastr.success(data);
-	        table.ajax.reload();
-	      }
-	  	});
-    });
 
 </script>
 
