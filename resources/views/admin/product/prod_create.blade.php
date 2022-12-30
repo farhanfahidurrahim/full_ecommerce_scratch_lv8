@@ -159,13 +159,6 @@
 		                     	<textarea class="form-control textarea" name="description">{{ old('description') }}</textarea>
 		                    </div>
 	                  	</div>
-	  	                <div class="row">
-		                    <div class="form-group col-lg-12">
-		                    	<label for="exampleInputPassword1">Video Embed Code</label>
-		                      	<input class="form-control" name="video" value="{{ old('video') }}" placeholder="Only code after embed word">
-		                      	<small class="text-danger">Only code after embed word</small>
-		                    </div>
-	                  	</div>
 	                </div>
                 <!-- /.card-body -->
            		</div>
