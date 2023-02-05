@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Task Work') }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
@@ -154,13 +154,16 @@
                     </div>
 
                     <!-- Wishlist -->
+                    @php
+                        $wshlst=DB::table('wishlists')->where('user_id',Auth::id())->count();
+                    @endphp
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                                 <div class="wishlist_icon"><img src="{{ asset('public/frontend') }}/images/heart.png" alt=""></div>
                                 <div class="wishlist_content">
-                                    <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                                    <div class="wishlist_count"></div>
+                                    <div class="wishlist_text"><a href="{{ route('wishlist') }}">Wishlist</a></div>
+                                    <div class="wishlist_count">{{ $wshlst }}</div>
                                 </div>
                             </div>
 

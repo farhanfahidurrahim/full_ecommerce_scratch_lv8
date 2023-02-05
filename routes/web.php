@@ -41,6 +41,12 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::get('/checkout','CheckoutController@checkout')->name('checkout');
     Route::post('/order/place','CheckoutController@orderPlace')->name('order.place');
 
+    //Wishlist
+    Route::get('/wishlist','CartController@Wishlist')->name('wishlist');
+    Route::get('/add-wishlist/{id}','CartController@addWishlist')->name('add.wishlist');
+    Route::get('/clear-all-wishlist','CartController@clearAllWishlist')->name('clear.all.wishlist');
+    Route::get('/remove-single-wishlist/{id}','CartController@removeSingleWishlist')->name('remove.single.wishlist');
+
     //Setting Profile
     Route::get('/home/setting','ProfileController@setting')->name('customer.setting');
     Route::post('/home/password/update','ProfileController@passwordChange')->name('customer.passwordchange');
