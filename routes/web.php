@@ -47,6 +47,9 @@ Route::group(['namespace'=>'App\Http\Controllers\Frontend'], function(){
     Route::get('/clear-all-wishlist','CartController@clearAllWishlist')->name('clear.all.wishlist');
     Route::get('/remove-single-wishlist/{id}','CartController@removeSingleWishlist')->name('remove.single.wishlist');
 
+    //Review
+    Route::post('/store-review','ReviewController@storeReview')->name('store.review');
+
     //Setting Profile
     Route::get('/home/setting','ProfileController@setting')->name('customer.setting');
     Route::post('/home/password/update','ProfileController@passwordChange')->name('customer.passwordchange');

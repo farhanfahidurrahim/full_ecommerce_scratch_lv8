@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
 use DB;
 
 class IndexController extends Controller
@@ -24,7 +25,9 @@ class IndexController extends Controller
     public function productDetails($slug)
     {
         $product=Product::where('slug',$slug)->first();
-        return view('frontend.product.product_details',compact('product'));
+        $related_product=DB::table('products')->where('subcategory_id',$product->subcategory_id)->orderBy('id','DESC')->take(10)->get();
+        $review=Review::where('product_id',$product->id)->get();
+        return view('frontend.product.product_details',compact('product','related_product','review'));
     }
 
     //Product Quick View
