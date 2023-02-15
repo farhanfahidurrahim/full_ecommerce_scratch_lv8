@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2023 at 12:23 PM
+-- Generation Time: Dec 10, 2022 at 07:12 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -233,9 +233,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2022_12_08_135247_create_order_details_table', 18),
 (23, '2022_12_08_144234_add_subtotal_price_to_order_details_table', 19),
 (24, '2022_12_09_043427_create_payment_gateway_bd_table', 20),
-(25, '2014_10_12_000000_create_users_table', 21),
-(26, '2023_02_04_153819_create_wishlists_table', 22),
-(27, '2023_02_05_070229_create_reviews_table', 23);
+(25, '2014_10_12_000000_create_users_table', 21);
 
 -- --------------------------------------------------------
 
@@ -272,8 +270,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `c_name`, `c_phone`, `c_email`, `c_country`, `c_zipcode`, `c_address`, `c_extra_phone`, `c_city`, `total`, `payment_type`, `tax`, `shipping_charge`, `order_id`, `status`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(4, 5, 'Ayon Zaman', '0166666666', 'ayon@gmail.com', 'Bangafaf', '2300', 'dfsdfgsdfg', '54654545', 'sdfsdf', '350,000.00', 'Hand Cash', '0', '0', '666170', 1, '11-12-2022', 'December', '2022', NULL, NULL),
-(8, 2, 'AH Rabbai', '01719082967', 'ahrabbani95@gmail.com', 'Bangladesh', '2300', 'Kishoreagnj Sadar', '01675717825', 'Kishorganj', '50,000.00', 'Hand Cash', '0', '0', '227268', 1, '05-02-2023', 'February', '2023', NULL, NULL);
+(1, 2, 'Rabbani', '01675717825', 'rabbani@gmail.com', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdfsdf', 'sdfsdf', '50,000.00', 'Aamarpay', '0', '0', '737193', 1, '08-12-2022', 'December', '2022', NULL, NULL),
+(2, 2, 'Rabbani', '0199999999', 'rabbani@gmail.com', 'Bangladesh', '2300', 'Nagua', '01777777777', 'kg', '50,000.00', 'Hand Cash', '0', '0', '69606', 1, '10-12-2022', 'December', '2022', NULL, NULL),
+(3, 2, 'Rabbani', '016666666', 'rabbani@gmail.com', 'Bangladesh', '2300', 'Nagua', '01777777777', 'kg', '50,000.00', 'Hand Cash', '0', '0', '674587', 1, '10-12-2022', 'December', '2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -301,12 +300,7 @@ CREATE TABLE `order_details` (
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `color`, `size`, `quantity`, `single_price`, `subtotal_price`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '1', '50000', '50000', NULL, NULL),
-(2, 3, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '1', '50000', '50000', NULL, NULL),
-(3, 4, 8, 'Suzuki New Bike', 'Blue', NULL, '1', '350000', '350000', NULL, NULL),
-(4, 5, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '1', '50000', '50000', NULL, NULL),
-(5, 6, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '3', '50000', '150000', NULL, NULL),
-(6, 7, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '3', '50000', '150000', NULL, NULL),
-(7, 8, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '1', '50000', '150000', NULL, NULL);
+(2, 3, 2, 'OnePlus 9 Pro SD 888', 'Morning Mist', '197g', '1', '50000', '50000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -447,8 +441,6 @@ CREATE TABLE `products` (
   `today_deal` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `product_slider` int(11) DEFAULT NULL,
-  `product_views` int(11) DEFAULT 0,
-  `trendy` int(2) DEFAULT 0,
   `flash_deal_id` int(11) DEFAULT NULL,
   `cash_on_delivery` int(11) DEFAULT NULL,
   `admin_id` int(11) DEFAULT NULL,
@@ -462,39 +454,15 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `size`, `color`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `product_views`, `trendy`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `month`, `date`, `created_at`, `updated_at`) VALUES
-(1, 9, 6, 6, 3, 1, 'FFR rrf', 'ffr-rrf', '963', 'pcs', 'shirt,men', 'M,XL', 'Black', NULL, '1000', '1500', '300', '10', 'F w name', '<p>asdadad ad</p>', 'ffr-rrf.jpg', '[\"1751037156792880.jpg\"]', 1, 1, 1, 0, 0, 0, NULL, NULL, 1, 'December', '01-12-2022', NULL, NULL),
-(2, 13, 22, 36, 15, 1, 'OnePlus 9 Pro SD 888', 'oneplus-9-pro-sd-888', 'CP-68239', 'pcs', 'phone,oneplus,mobile', '197g, 8.7mm thickness', 'Morning Mist, Forest Green, Stellar Black', NULL, '40,000', '55000', '50000', '10', 'Nagua', '<p><span style=\"color: rgb(51, 51, 51); font-family: Tahoma, Helvetica, Arial, sans-serif; font-size: 14px;\">OnePlus 9 Pro internal storage base variant of 8 GB, 12 GB Ram, 128 GB, 256 GB Internal Memory (ROM). OnePlus 9 Pro which is available in Morning Mist, Forest Green, Stellar Black colour.</span><br></p>', 'oneplus-9-pro-sd-888.jpg', '[\"1751477813612525.jpg\"]', 1, 1, 1, 1, 1, 1, NULL, NULL, 1, 'December', '06-12-2022', NULL, '2023-02-06 23:54:22'),
-(3, 14, 21, 41, 13, 1, 'Honda CBR150R Repsol ABS', 'honda-cbr150r-repsol-abs', 'H-951753', 'pcs', 'honda,bike', NULL, 'Orange', NULL, '50,000', '60000', '55000', '10', 'Nagua', '<p>This is Honda bike</p>', 'honda-cbr150r-repsol-abs.jpg', '[\"1751479253903396.jpg\",\"1751479253962867.jpg\"]', 1, 1, 1, NULL, 0, 0, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
-(4, 9, 12, 23, 14, 1, 'Lather Shoe Loofer', 'lather-shoe-loofer', 'LS-487631', 'pcs', 'shoe,loofer', 'M,XL', 'Black,Grey', NULL, '1,500', '2500', '2000', '15', 'Puranthana', '<p>this is shoe</p>', 'lather-shoe-loofer.jpg', '[\"1751479679832695.jpg\",\"1751479679892823.jpg\"]', 1, 1, 1, NULL, 0, 1, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
-(5, 10, 13, 14, 3, 1, 'Women Stylish Shoe', 'women-stylish-shoe', 'ws-367418', 'pcs', 'shoe,women', 'M,XL', 'Black,Grey', NULL, '2,500', '3500', '3000', '12', 'Nagua', '<p>this is women shoe</p>', 'women-stylish-shoe.jpg', '[\"1751479874879421.jpg\"]', 1, 1, 1, NULL, 0, 0, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
-(6, 10, 13, 14, 4, 1, 'Women Normal Shoe', 'women-normal-shoe', 'ws-475819', 'pcs', 'shoe,women', 'M,XL', 'Black,Grey', NULL, '2,000', '3000', '2500', '14', 'Nagua', '<p>thi is women shoe</p>', 'women-normal-shoe.jpg', '[\"1751480010150782.jpg\"]', 1, 1, 1, NULL, 0, 1, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
-(7, 13, 22, 42, 17, 1, 'Iphone 9 256GB', 'iphone-9-256gb', 'ip-714638', 'pcs', 'phone,mobile,iphone', '197g, 8.7mm thickness', 'Orange', NULL, '70000', '85000', '80000', '12', 'Nagua', '<p>this is iphone</p>', 'iphone-9-256gb.jpg', '[\"1751480198947767.jpg\"]', 1, 1, 1, NULL, 3, 1, NULL, NULL, 1, 'December', '06-12-2022', NULL, '2023-02-07 01:32:35'),
-(8, 14, 21, 43, 19, 1, 'Suzuki New Bike', 'suzuki-new-bike', 'sb-463297', 'pcs', 'bike,suzuki', NULL, 'Blue', NULL, '300000', '360000', '350000', '10', 'Nagua', '<p>this is bike</p>', 'suzuki-new-bike.jpg', '[\"1751480737600960.jpg\"]', 1, 1, 1, NULL, 0, 0, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `reviews`
---
-
-CREATE TABLE `reviews` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `review` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL,
-  `review_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `reviews`
---
-
-INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review`, `rating`, `review_date`, `created_at`, `updated_at`) VALUES
-(2, 2, 2, 'jossssssssssss', 5, '05-02-2023', NULL, NULL);
+INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `childcategory_id`, `brand_id`, `pickup_point_id`, `name`, `slug`, `code`, `unit`, `tags`, `size`, `color`, `video`, `purchase_price`, `selling_price`, `discount_price`, `stock_quantity`, `warehouse`, `description`, `thumbnail`, `images`, `featured`, `today_deal`, `status`, `product_slider`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `month`, `date`, `created_at`, `updated_at`) VALUES
+(1, 9, 6, 6, 3, 1, 'FFR rrf', 'ffr-rrf', '963', 'pcs', 'shirt,men', 'M,XL', 'Black', NULL, '1000', '1500', '300', '10', 'F w name', '<p>asdadad ad</p>', 'ffr-rrf.jpg', '[\"1751037156792880.jpg\"]', 1, 1, 1, 0, NULL, NULL, 1, 'December', '01-12-2022', NULL, NULL),
+(2, 13, 22, 36, 15, 1, 'OnePlus 9 Pro SD 888', 'oneplus-9-pro-sd-888', 'CP-68239', 'pcs', 'phone,oneplus,mobile', '197g, 8.7mm thickness', 'Morning Mist, Forest Green, Stellar Black', NULL, '40,000', '55000', '50000', '10', 'Nagua', '<p><span style=\"color: rgb(51, 51, 51); font-family: Tahoma, Helvetica, Arial, sans-serif; font-size: 14px;\">OnePlus 9 Pro internal storage base variant of 8 GB, 12 GB Ram, 128 GB, 256 GB Internal Memory (ROM). OnePlus 9 Pro which is available in Morning Mist, Forest Green, Stellar Black colour.</span><br></p>', 'oneplus-9-pro-sd-888.jpg', '[\"1751477813612525.jpg\"]', 1, 1, 1, 1, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(3, 14, 21, 41, 13, 1, 'Honda CBR150R Repsol ABS', 'honda-cbr150r-repsol-abs', 'H-951753', 'pcs', 'honda,bike', NULL, 'Orange', NULL, '50,000', '60000', '55000', '10', 'Nagua', '<p>This is Honda bike</p>', 'honda-cbr150r-repsol-abs.jpg', '[\"1751479253903396.jpg\",\"1751479253962867.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(4, 9, 12, 23, 14, 1, 'Lather Shoe Loofer', 'lather-shoe-loofer', 'LS-487631', 'pcs', 'shoe,loofer', 'M,XL', 'Black,Grey', NULL, '1,500', '2500', '2000', '15', 'Puranthana', '<p>this is shoe</p>', 'lather-shoe-loofer.jpg', '[\"1751479679832695.jpg\",\"1751479679892823.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(5, 10, 13, 14, 3, 1, 'Women Stylish Shoe', 'women-stylish-shoe', 'ws-367418', 'pcs', 'shoe,women', 'M,XL', 'Black,Grey', NULL, '2,500', '3500', '3000', '12', 'Nagua', '<p>this is women shoe</p>', 'women-stylish-shoe.jpg', '[\"1751479874879421.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(6, 10, 13, 14, 4, 1, 'Women Normal Shoe', 'women-normal-shoe', 'ws-475819', 'pcs', 'shoe,women', 'M,XL', 'Black,Grey', NULL, '2,000', '3000', '2500', '14', 'Nagua', '<p>thi is women shoe</p>', 'women-normal-shoe.jpg', '[\"1751480010150782.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(7, 13, 22, 42, 17, 1, 'Iphone 9 256GB', 'iphone-9-256gb', 'ip-714638', 'pcs', 'phone,mobile,iphone', '197g, 8.7mm thickness', 'Orange', NULL, '70000', '85000', '80000', '12', 'Nagua', '<p>this is iphone</p>', 'iphone-9-256gb.jpg', '[\"1751480198947767.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL),
+(8, 14, 21, 43, 19, 1, 'Suzuki New Bike', 'suzuki-new-bike', 'sb-463297', 'pcs', 'bike,suzuki', NULL, 'Blue', NULL, '300000', '360000', '350000', '10', 'Nagua', '<p>this is bike</p>', 'suzuki-new-bike.jpg', '[\"1751480737600960.jpg\"]', 1, 1, 1, NULL, NULL, NULL, 1, 'December', '06-12-2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -624,10 +592,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone`, `is_admin`, `avatar`, `provider`, `provider_id`, `access_token`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Farhan', 'farhan@gmail.com', NULL, '$2y$10$qSO3KnAbHh60TncxN746mOcGZSTK0l2xiusIQJ/heDKL/NpfQy0eu', '01675717825', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Ah Rabbani', 'rabbani@gmail.com', NULL, '$2y$10$qSO3KnAbHh60TncxN746mOcGZSTK0l2xiusIQJ/heDKL/NpfQy0eu', '01777777777', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Fahidur Rahim Farhan', 'farhan.fahidurrahim@gmail.com', NULL, '', NULL, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp4TEJxHMlPL3u2jk93289lPbk4rqTYJcW3qB6QR=s96-c', 'google', '112148754157351629555', 'ya29.a0AeTM1ickx3gvcFWz2btcAaWk8ZajYGG4VSyQ_bdsRw20cQH2glO1Lz6DFFJGWhRQTYMvFwwKMYSUNJWXcvRfWs3udsofXjoViDcNXyLzWL4FARl-7lAsiT2XE86Nc2hfXehmVAiqZ1tjI1c0rKbPNlazhau3aCgYKAaQSARASFQHWtWOmlaK5OVU5ZjM3YLdKeVVH8g0163', '6N820LOFHvwWtDhTtV8k03gHmrz3Tzih7kqEMSJYihwrnXLlL7dCyvTlgnWR', '2022-12-10 11:58:17', '2022-12-11 05:22:19'),
-(4, 'FarhaN Fahidur Rahim', 'f.onefarhan@gmail.com', NULL, '', NULL, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp6KVqw-VSSTwUbCjFfOPwYQLweUuLiHHLvtctJD=s96-c', 'google', '111175482385009713964', 'ya29.a0AeTM1ifZZcVh_eBI01Rw_pDVehGgDwRItev9aPW9Cal9iLQiQuzSugDHBwEXZVcY0KyAXmaxIVW_fXNkhA8utmH6Xj4MpJA7oSCa0GwIBt3of_kzodYGe_s5Fk0Idr75bmt72ihnXKgq35BG8TkApmaNS47NaCgYKAdISARASFQHWtWOmhQhHlpY21qeC1C1CgZuYeA0163', 'zm0dvQbEoQxvLzy7Ujl9FQmixYCl9P6jMxe8EFkh3QPqD8Lii757rLaNeIE9', '2022-12-10 12:09:39', '2022-12-10 12:09:39'),
-(5, 'Ayon Zaman', 'ayon@gmail.com', NULL, '$2y$10$.b.nK26mlHp.LFKNoGLaHuFGgndz/PUlj9VgDDtx13mZmb33hh8YG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-12-11 05:23:10', '2022-12-11 05:23:10');
+(2, 'Ah Rabbani', 'ahrabbani95@gmail.com', NULL, '$2y$10$qSO3KnAbHh60TncxN746mOcGZSTK0l2xiusIQJ/heDKL/NpfQy0eu', '01777777777', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Fahidur Rahim Farhan', 'farhan.fahidurrahim@gmail.com', NULL, '', NULL, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp4TEJxHMlPL3u2jk93289lPbk4rqTYJcW3qB6QR=s96-c', 'google', '112148754157351629555', 'ya29.a0AeTM1iddifniAzfv1r4AwS5oqoVjtrlCBC04OmWdJni4UoISXNMP-CGRnf1ay1-6zInTgYdvfdWvRhQ2IRYcXjdqyaLm2riAOG3hJo7Eyzlkcdml_VmQOXiOQzU9WtcvJP0Yh_hbI_pGpfl9rHRfCKVvaW4AaCgYKATYSARASFQHWtWOmFR6XzQYKtIgBdIJwWSLluA0163', 'uyXR3TyTpCgVuPMdFzLUDI5zZH5hVrFQ3Y3FIBLRonCDmrJcsdu4ekqtB5e0', '2022-12-10 11:58:17', '2022-12-10 12:10:21'),
+(4, 'FarhaN Fahidur Rahim', 'f.onefarhan@gmail.com', NULL, '', NULL, NULL, 'https://lh3.googleusercontent.com/a/AEdFTp6KVqw-VSSTwUbCjFfOPwYQLweUuLiHHLvtctJD=s96-c', 'google', '111175482385009713964', 'ya29.a0AeTM1ifZZcVh_eBI01Rw_pDVehGgDwRItev9aPW9Cal9iLQiQuzSugDHBwEXZVcY0KyAXmaxIVW_fXNkhA8utmH6Xj4MpJA7oSCa0GwIBt3of_kzodYGe_s5Fk0Idr75bmt72ihnXKgq35BG8TkApmaNS47NaCgYKAdISARASFQHWtWOmhQhHlpY21qeC1C1CgZuYeA0163', 'zm0dvQbEoQxvLzy7Ujl9FQmixYCl9P6jMxe8EFkh3QPqD8Lii757rLaNeIE9', '2022-12-10 12:09:39', '2022-12-10 12:09:39');
 
 -- --------------------------------------------------------
 
@@ -652,21 +619,6 @@ INSERT INTO `warehouses` (`id`, `warehouse_name`, `warehouse_address`, `warehous
 (1, 'Nagua', 'Nagua, Kishoreganj', '016', NULL, NULL),
 (3, 'Gaital', 'Gaital, Kishoreganj', '879845', NULL, NULL),
 (4, 'Puranthana', 'Puranthana, Kishoreganj', '36451', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wishlists`
---
-
-CREATE TABLE `wishlists` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `date` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -764,14 +716,6 @@ ALTER TABLE `products`
   ADD KEY `products_subcategory_id_foreign` (`subcategory_id`);
 
 --
--- Indexes for table `reviews`
---
-ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reviews_user_id_foreign` (`user_id`),
-  ADD KEY `reviews_product_id_foreign` (`product_id`);
-
---
 -- Indexes for table `seos`
 --
 ALTER TABLE `seos`
@@ -802,14 +746,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `warehouses`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `wishlists`
---
-ALTER TABLE `wishlists`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `wishlists_user_id_foreign` (`user_id`),
-  ADD KEY `wishlists_product_id_foreign` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -849,19 +785,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -894,12 +830,6 @@ ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `reviews`
---
-ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `seos`
 --
 ALTER TABLE `seos`
@@ -921,19 +851,13 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `warehouses`
 --
 ALTER TABLE `warehouses`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `wishlists`
---
-ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -954,24 +878,10 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_subcategory_id_foreign` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `reviews`
---
-ALTER TABLE `reviews`
-  ADD CONSTRAINT `reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `subcategories`
 --
 ALTER TABLE `subcategories`
   ADD CONSTRAINT `subcategories_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `wishlists`
---
-ALTER TABLE `wishlists`
-  ADD CONSTRAINT `wishlists_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `wishlists_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
